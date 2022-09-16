@@ -1,8 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <chrono>
+#include <thread>
 
 #include "GlobalValues.hpp"
 #include "Band.hpp"
+#include "Block.hpp"
 
 
 using namespace sf;
@@ -14,7 +17,8 @@ int main()
     window.setFramerateLimit(60);
     Event event;
 
-    Band band(Vector2f{ NUMBER_OF_COLUMNS * GRID, NUMBER_OF_ROWS * GRID });
+    Band band{ GRID, GRID };
+    Block block{ 5 * GRID, GRID };
 
     while (true)
     {
@@ -27,9 +31,11 @@ int main()
                 break;
             }
         }
-    window.draw(band);
-    window.display();
+        block.fall();
+        window.draw(band);
+        window.draw(block);
+        window.display();
+        this_thread::sleep_for(chrono::milliseconds(GAME_SPEED));
     }
-
     return 0;
 }

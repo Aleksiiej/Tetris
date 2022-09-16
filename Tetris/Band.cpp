@@ -1,9 +1,9 @@
 #include "Band.hpp"
 
-Band::Band(Vector2f vec) : size_(vec)
+Band::Band(const int& bandX, const int& bandY)
 {
-	band_.setSize(vec);
-	band_.setPosition(GRID, GRID);
+	band_.setPosition(bandX, bandY);
+	band_.setSize(size_);
 	band_.setFillColor(Color::White);
 	band_.setOutlineColor(Color::Black);
 	band_.setOutlineThickness(5);

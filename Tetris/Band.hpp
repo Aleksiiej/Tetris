@@ -7,13 +7,13 @@ using namespace sf;
 class Band : public sf::Drawable
 {
 public:
-	Band(Vector2f vec);
+	Band(const int& bandX, const int& bandY);
 	Band() = delete;
 	~Band() = default;
 
 private:
-	RectangleShape band_;
-	Vector2f size_;
+	RectangleShape band_{};
+	Vector2f size_{ NUMBER_OF_COLUMNS * GRID, NUMBER_OF_ROWS * GRID };
 
 	void draw(RenderTarget& target, RenderStates states) const noexcept override;
 };
