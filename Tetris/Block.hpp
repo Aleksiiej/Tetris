@@ -14,7 +14,7 @@ class Block : public Drawable
 {
 	friend class BlockBoard;
 public:
-	Block(const int& blockX, const int& blockY, shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept;
+	Block(const float& blockX, const float& blockY, const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept;
 	Block() = default;
 	~Block() = default;
 
@@ -27,7 +27,7 @@ public:
 
 private:
 	RectangleShape block_{};
-	const shared_ptr<BlockBoard> ptrToBlockBoard_{};
+	shared_ptr<BlockBoard> ptrToBlockBoard_{};
  
 	void draw(RenderTarget& target, RenderStates states) const noexcept override;
 };

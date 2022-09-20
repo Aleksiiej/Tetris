@@ -8,12 +8,12 @@ using namespace sf;
 class Band : public sf::Drawable
 {
 public:
-	Band(const int& bandX, const int& bandY);
+	Band(const uint8_t& bandX, const uint8_t& bandY);
 	Band() = delete;
 	~Band() = default;
 
 private:
-	const RectangleShape band_{};
+	RectangleShape band_{};
 	const Vector2f size_{ NUMBER_OF_COLUMNS * GRID, NUMBER_OF_ROWS * GRID };
 
 	void draw(RenderTarget& target, RenderStates states) const noexcept override;

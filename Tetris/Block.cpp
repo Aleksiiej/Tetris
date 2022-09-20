@@ -1,14 +1,14 @@
 #include "Block.hpp"
 #include "blockBoard.hpp"
 
-Block::Block(const int& blockX, const int& blockY, shared_ptr<BlockBoard>& ptrToBlockBoard) : ptrToBlockBoard_(ptrToBlockBoard)
+Block::Block(const float& blockX, const float& blockY, const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept : ptrToBlockBoard_(ptrToBlockBoard)
 {
 	block_.setPosition(blockX, blockY);
 	block_.setSize(Vector2f{ GRID, GRID });
 	block_.setFillColor(Color::Red);
 }
 
-void Block::fall()
+void Block::fall() noexcept
 {
 	if (isFallingPossible())
 	{
@@ -16,7 +16,7 @@ void Block::fall()
 	}
 }
 
-bool Block::isFallingPossible()
+bool Block::isFallingPossible() noexcept
 {
 	if (block_.getPosition().y >= GRID * NUMBER_OF_ROWS)
 	{
@@ -27,7 +27,7 @@ bool Block::isFallingPossible()
 	return true;
 }
 
-void Block::moveRight()
+void Block::moveRight() noexcept
 {
 	if (isMoveRightPossible())
 	{
@@ -44,7 +44,7 @@ bool Block::isMoveRightPossible() const noexcept
 	return true;
 }
 
-void Block::moveLeft()
+void Block::moveLeft() noexcept
 {
 	if (isMoveLeftPossible())
 	{
