@@ -10,6 +10,17 @@ Block::Block(const int& blockX, const int& blockY)
 void Block::fall()
 {
 	block_.move(0, GRID);
+
+}
+
+void Block::moveRight()
+{
+	block_.move(GRID, 0);
+}
+
+void Block::moveLeft()
+{
+	block_.move(-GRID, 0);
 }
 
 void Block::draw(RenderTarget& target, RenderStates states) const noexcept

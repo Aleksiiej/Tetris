@@ -30,6 +30,14 @@ int main()
                 window.close();
                 break;
             }
+            if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Right)
+            {
+                block.moveRight();
+            }
+            if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Left)
+            {
+                block.moveLeft();
+            }
         }
         block.fall();
         window.draw(band);

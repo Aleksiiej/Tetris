@@ -13,11 +13,12 @@ public:
 	~Block() = default;
 
 	void fall();
+	void moveRight();
+	void moveLeft();
 
 private:
 	RectangleShape block_{};
 	Vector2f size_{GRID, GRID};
-	Vector2f currentPosition;
 
 	void draw(RenderTarget& target, RenderStates states) const noexcept override;
 };
