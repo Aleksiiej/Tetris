@@ -2,6 +2,7 @@
 #include <SFML/Window.hpp>
 #include <chrono>
 #include <thread>
+#include <memory>
 
 #include "GlobalValues.hpp"
 #include "Band.hpp"
@@ -17,8 +18,8 @@ int main()
     window.setFramerateLimit(60);
     Event event;
 
-    Band band{ GRID, GRID };
-    BlockBoard* blockBoardPtr = new BlockBoard;
+    const Band band{ GRID, GRID };
+    auto blockBoardPtr = make_shared<BlockBoard>();
     Block block{ 5 * GRID, 0, blockBoardPtr };
 
     while (true)

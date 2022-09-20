@@ -11,9 +11,9 @@ class BlockBoard
 {
 	friend class Block;
 public:
-	BlockBoard();
+	BlockBoard() noexcept;
 
-	//private:
+//private:
 	array<array<Block, NUMBER_OF_ROWS>, NUMBER_OF_COLUMNS> blockBoard_;
 };
 

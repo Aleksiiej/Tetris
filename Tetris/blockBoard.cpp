@@ -1,6 +1,6 @@
 #include "BlockBoard.hpp"
 
-BlockBoard::BlockBoard()
+BlockBoard::BlockBoard() noexcept
 {
     for_each(begin(blockBoard_), end(blockBoard_), [](auto& el) { el.fill(Block()); });
     for (int i = 0; i < NUMBER_OF_COLUMNS; i++)

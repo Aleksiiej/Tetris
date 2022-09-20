@@ -1,16 +1,11 @@
 #include "Block.hpp"
 #include "blockBoard.hpp"
 
-Block::Block(const int& blockX, const int& blockY, BlockBoard* ptrToBlockBoard) : ptrToBlockBoard_(ptrToBlockBoard)
+Block::Block(const int& blockX, const int& blockY, shared_ptr<BlockBoard>& ptrToBlockBoard) : ptrToBlockBoard_(ptrToBlockBoard)
 {
 	block_.setPosition(blockX, blockY);
-	block_.setSize(size_);
+	block_.setSize(Vector2f{ GRID, GRID });
 	block_.setFillColor(Color::Red);
-}
-
-Block::Block()
-{
-	block_.setFillColor(Color::White);
 }
 
 void Block::fall()
@@ -40,7 +35,7 @@ void Block::moveRight()
 	}
 }
 
-bool Block::isMoveRightPossible()
+bool Block::isMoveRightPossible() const noexcept
 {
 	if (block_.getPosition().x >= GRID * NUMBER_OF_COLUMNS)
 	{
@@ -57,7 +52,7 @@ void Block::moveLeft()
 	}
 }
 
-bool Block::isMoveLeftPossible()
+bool Block::isMoveLeftPossible() const noexcept
 {
 	if (block_.getPosition().x <= GRID)
 	{
@@ -69,8 +64,4 @@ bool Block::isMoveLeftPossible()
 void Block::draw(RenderTarget& target, RenderStates states) const noexcept
 {
 	target.draw(block_, states);
-}
-
-void Block::updatePosition()
-{
 }

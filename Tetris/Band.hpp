@@ -13,8 +13,8 @@ public:
 	~Band() = default;
 
 private:
-	RectangleShape band_{};
-	Vector2f size_{ NUMBER_OF_COLUMNS * GRID, NUMBER_OF_ROWS * GRID };
+	const RectangleShape band_{};
+	const Vector2f size_{ NUMBER_OF_COLUMNS * GRID, NUMBER_OF_ROWS * GRID };
 
 	void draw(RenderTarget& target, RenderStates states) const noexcept override;
 };
