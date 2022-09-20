@@ -6,7 +6,8 @@
 #include "GlobalValues.hpp"
 #include "Band.hpp"
 #include "Block.hpp"
-
+#include "StateBoard.hpp"
+#include "blockBoard.hpp"
 
 using namespace sf;
 using namespace std;
@@ -19,6 +20,8 @@ int main()
 
     Band band{ GRID, GRID };
     Block block{ 5 * GRID, GRID };
+    StateBoard stateBoard;
+    BlockBoard blockBoard;
 
     while (true)
     {
@@ -39,7 +42,17 @@ int main()
                 block.moveLeft();
             }
         }
+
         block.fall();
+
+        for (int i = 0; i < NUMBER_OF_COLUMNS; i++)
+        {
+            for (int j = 0; j < NUMBER_OF_ROWS; j++)
+            {
+                //blockBoard.blockBoard_.at(i).at(j) == stateBoard.stateBoard_.at(i).at(j).;
+                window.draw(blockBoard.blockBoard_.at(i).at(j));
+            }    
+        }
         window.draw(band);
         window.draw(block);
         window.display();
