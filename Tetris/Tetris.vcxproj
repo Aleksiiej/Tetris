@@ -154,7 +154,6 @@
     <ClCompile Include="Band.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="blockBoard.cpp" />
-    <ClCompile Include="StateBoard.cpp" />
     <ClCompile Include="Tetris.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -162,7 +161,6 @@
     <ClInclude Include="Block.hpp" />
     <ClInclude Include="blockBoard.hpp" />
     <ClInclude Include="GlobalValues.hpp" />
-    <ClInclude Include="StateBoard.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

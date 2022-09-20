@@ -6,7 +6,6 @@
 #include "GlobalValues.hpp"
 #include "Band.hpp"
 #include "Block.hpp"
-#include "StateBoard.hpp"
 #include "blockBoard.hpp"
 
 using namespace sf;
@@ -19,9 +18,8 @@ int main()
     Event event;
 
     Band band{ GRID, GRID };
-    Block block{ 5 * GRID, GRID };
-    StateBoard stateBoard;
-    BlockBoard blockBoard;
+    BlockBoard* blockBoardPtr = new BlockBoard;
+    Block block{ 5 * GRID, 0, blockBoardPtr };
 
     while (true)
     {
@@ -44,16 +42,14 @@ int main()
         }
 
         block.fall();
-
+        window.draw(band);
         for (int i = 0; i < NUMBER_OF_COLUMNS; i++)
         {
             for (int j = 0; j < NUMBER_OF_ROWS; j++)
             {
-                //blockBoard.blockBoard_.at(i).at(j) == stateBoard.stateBoard_.at(i).at(j).;
-                window.draw(blockBoard.blockBoard_.at(i).at(j));
+                window.draw(blockBoardPtr->blockBoard_.at(i).at(j));
             }    
         }
-        window.draw(band);
         window.draw(block);
         window.display();
         this_thread::sleep_for(chrono::milliseconds(GAME_SPEED));
