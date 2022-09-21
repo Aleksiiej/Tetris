@@ -13,3 +13,8 @@ BlockBoard::BlockBoard() noexcept
         }
     }
 }
+
+const BoardArray& BlockBoard::getBoardArrayRef() const noexcept
+{
+    return blockBoard_;
+}

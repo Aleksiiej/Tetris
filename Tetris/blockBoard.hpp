@@ -1,11 +1,12 @@
 #pragma once
 
-#include <array>
 #include <algorithm>
+#include <array>
 #include "GlobalValues.hpp"
 #include "Block.hpp"
 
 using namespace std;
+using BoardArray = array<array<Block, NUMBER_OF_ROWS>, NUMBER_OF_COLUMNS>;
 
 class BlockBoard
 {
@@ -13,7 +14,9 @@ class BlockBoard
 public:
 	BlockBoard() noexcept;
 
-//private:
-	array<array<Block, NUMBER_OF_ROWS>, NUMBER_OF_COLUMNS> blockBoard_;
+	const BoardArray& getBoardArrayRef() const noexcept;
+
+private:
+	BoardArray blockBoard_;
 };
 

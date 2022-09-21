@@ -13,6 +13,7 @@ class BlockBoard;
 class Block : public Drawable
 {
 	friend class BlockBoard;
+	friend class RenderWindow;
 public:
 	Block(const float& blockX, const float& blockY, const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept;
 	Block() = default;

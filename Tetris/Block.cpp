@@ -1,5 +1,5 @@
 #include "Block.hpp"
-#include "blockBoard.hpp"
+#include "BlockBoard.hpp"
 
 Block::Block(const float& blockX, const float& blockY, const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept : ptrToBlockBoard_(ptrToBlockBoard)
 {
@@ -21,10 +21,16 @@ bool Block::isFallingPossible() noexcept
 	if (block_.getPosition().y >= GRID * NUMBER_OF_ROWS)
 	{
 		ptrToBlockBoard_->blockBoard_.at((block_.getPosition().x - GRID) / GRID).at((block_.getPosition().y - GRID) / GRID).block_.setFillColor(Color::Red);
-		block_.setPosition(5 * GRID, 0);
+		block_.setPosition(5 * GRID, GRID);
 		return false;
 	}
-	return true;
+	else if (ptrToBlockBoard_->blockBoard_.at((block_.getPosition().x - GRID) / GRID).at((block_.getPosition().y - GRID) / GRID + 1).block_.getFillColor() != Color::White)
+	{
+		ptrToBlockBoard_->blockBoard_.at((block_.getPosition().x - GRID) / GRID).at((block_.getPosition().y - GRID) / GRID).block_.setFillColor(Color::Red);
+		block_.setPosition(5 * GRID, GRID);
+		return false;
+	}
+	else return true;
 }
 
 void Block::moveRight() noexcept
@@ -37,7 +43,8 @@ void Block::moveRight() noexcept
 
 bool Block::isMoveRightPossible() const noexcept
 {
-	if (block_.getPosition().x >= GRID * NUMBER_OF_COLUMNS)
+	if (block_.getPosition().x >= GRID * NUMBER_OF_COLUMNS
+		or ptrToBlockBoard_->blockBoard_.at((block_.getPosition().x - GRID) / GRID + 1).at((block_.getPosition().y - GRID) / GRID).block_.getFillColor() != Color::White)
 	{
 		return false;
 	}
@@ -54,7 +61,8 @@ void Block::moveLeft() noexcept
 
 bool Block::isMoveLeftPossible() const noexcept
 {
-	if (block_.getPosition().x <= GRID)
+	if (block_.getPosition().x <= GRID
+		or ptrToBlockBoard_->blockBoard_.at((block_.getPosition().x - GRID) / GRID - 1).at((block_.getPosition().y - GRID) / GRID).block_.getFillColor() != Color::White)
 	{
 		return false;
 	}

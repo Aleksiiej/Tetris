@@ -24,7 +24,7 @@
     <ClCompile Include="Block.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="blockBoard.cpp">
+    <ClCompile Include="BlockBoard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,7 +35,7 @@
     <ClInclude Include="Block.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="blockBoard.hpp">
+    <ClInclude Include="BlockBoard.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GlobalValues.hpp">

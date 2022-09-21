@@ -1,13 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
-#include <chrono>
-#include <thread>
 #include <memory>
 
-#include "GlobalValues.hpp"
 #include "Band.hpp"
 #include "Block.hpp"
-#include "blockBoard.hpp"
+#include "BlockBoard.hpp"
+#include "GlobalValues.hpp"
 
 using namespace sf;
 using namespace std;
@@ -20,7 +18,7 @@ int main()
 
     const Band band{ GRID, GRID };
     auto blockBoardPtr = make_shared<BlockBoard>();
-    Block block{ 5 * GRID, 0, blockBoardPtr };
+    Block block{ 5 * GRID, GRID, blockBoardPtr };
 
     while (true)
     {
@@ -41,19 +39,18 @@ int main()
                 block.moveLeft();
             }
         }
-
         block.fall();
         window.draw(band);
         for (int i = 0; i < NUMBER_OF_COLUMNS; i++)
         {
             for (int j = 0; j < NUMBER_OF_ROWS; j++)
             {
-                window.draw(blockBoardPtr->blockBoard_.at(i).at(j));
+                window.draw(blockBoardPtr->getBoardArrayRef().at(i).at(j));
             }    
         }
         window.draw(block);
         window.display();
-        this_thread::sleep_for(chrono::milliseconds(GAME_SPEED));
+        sleep(milliseconds(GAME_SPEED));
     }
     return 0;
 }
