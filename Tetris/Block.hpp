@@ -27,6 +27,8 @@ public:
 
 	const RectangleShape& getBlockRef() const noexcept;
 
+	const RectangleShape& getBlockRef() const noexcept;
+
 private:
 	RectangleShape block_{};
 	shared_ptr<BlockBoard> ptrToBlockBoard_{};
