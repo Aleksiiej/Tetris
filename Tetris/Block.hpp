@@ -13,7 +13,6 @@ class BlockBoard;
 class Block : public Drawable
 {
 	friend class BlockBoard;
-	friend class RenderWindow;
 public:
 	Block(const float& blockX, const float& blockY, const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept;
 	Block() = default;
@@ -26,10 +25,14 @@ public:
 	void moveLeft() noexcept;
 	bool isMoveLeftPossible() const noexcept;
 
+	const RectangleShape& getBlockRef() const noexcept;
+
 private:
 	RectangleShape block_{};
 	shared_ptr<BlockBoard> ptrToBlockBoard_{};
  
 	void draw(RenderTarget& target, RenderStates states) const noexcept override;
+	const uint8_t gridToX() const noexcept;
+	const uint8_t gridToY() const noexcept;
 };
 

@@ -41,12 +41,9 @@ int main()
         }
         block.fall();
         window.draw(band);
-        for (int i = 0; i < NUMBER_OF_COLUMNS; i++)
+        for (const auto& innerArray : blockBoardPtr->getBoardArrayRef())
         {
-            for (int j = 0; j < NUMBER_OF_ROWS; j++)
-            {
-                window.draw(blockBoardPtr->getBoardArrayRef().at(i).at(j));
-            }    
+            for_each(begin(innerArray), end(innerArray), [&window](const auto& block) { window.draw(block.getBlockRef()); });
         }
         window.draw(block);
         window.display();

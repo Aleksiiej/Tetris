@@ -13,8 +13,9 @@ class BlockBoard
 	friend class Block;
 public:
 	BlockBoard() noexcept;
+	~BlockBoard() = default;
 
-	const BoardArray& getBoardArrayRef() const noexcept;
+	BoardArray& getBoardArrayRef() noexcept;
 
 private:
 	BoardArray blockBoard_;
