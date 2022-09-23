@@ -16,17 +16,17 @@ void Block::fall() noexcept
 	}
 }
 
-bool Block::isFallingPossible() noexcept
+const bool Block::isFallingPossible() noexcept
 {
 	if (block_.getPosition().y >= GRID * NUMBER_OF_ROWS)
 	{
-		ptrToBlockBoard_->blockBoard_.at((block_.getPosition().x - GRID) / GRID).at((block_.getPosition().y - GRID) / GRID).block_.setFillColor(Color::Red);
+		ptrToBlockBoard_->getBoardArrayRef().at(gridToX()).at(gridToY()).block_.setFillColor(Color::Red); //TODO: Owner of this line should be class BlockBoard
 		block_.setPosition(5 * GRID, GRID);
 		return false;
 	}
-	else if (ptrToBlockBoard_->blockBoard_.at((block_.getPosition().x - GRID) / GRID).at((block_.getPosition().y - GRID) / GRID + 1).block_.getFillColor() != Color::White)
+	else if (ptrToBlockBoard_->blockBoard_.at(gridToX()).at(gridToY() + 1).block_.getFillColor() != Color::White)
 	{
-		ptrToBlockBoard_->blockBoard_.at((block_.getPosition().x - GRID) / GRID).at((block_.getPosition().y - GRID) / GRID).block_.setFillColor(Color::Red);
+		ptrToBlockBoard_->getBoardArrayRef().at(gridToX()).at(gridToY()).block_.setFillColor(Color::Red); //TODO: Owner of this line should be class BlockBoard
 		block_.setPosition(5 * GRID, GRID);
 		return false;
 	}
@@ -41,10 +41,10 @@ void Block::moveRight() noexcept
 	}
 }
 
-bool Block::isMoveRightPossible() const noexcept
+const bool Block::isMoveRightPossible() const noexcept
 {
 	if (block_.getPosition().x >= GRID * NUMBER_OF_COLUMNS
-		or ptrToBlockBoard_->blockBoard_.at((block_.getPosition().x - GRID) / GRID + 1).at((block_.getPosition().y - GRID) / GRID).block_.getFillColor() != Color::White)
+		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX() + 1).at(gridToY()).block_.getFillColor() != Color::White)
 	{
 		return false;
 	}
@@ -59,17 +59,32 @@ void Block::moveLeft() noexcept
 	}
 }
 
-bool Block::isMoveLeftPossible() const noexcept
+const bool Block::isMoveLeftPossible() const noexcept
 {
 	if (block_.getPosition().x <= GRID
-		or ptrToBlockBoard_->blockBoard_.at((block_.getPosition().x - GRID) / GRID - 1).at((block_.getPosition().y - GRID) / GRID).block_.getFillColor() != Color::White)
+		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX() - 1).at(gridToY()).block_.getFillColor() != Color::White)
 	{
 		return false;
 	}
 	return true;
 }
 
+const RectangleShape& Block::getBlockRef() const noexcept
+{
+	return block_;
+}
+
 void Block::draw(RenderTarget& target, RenderStates states) const noexcept
 {
 	target.draw(block_, states);
+}
+
+const uint8_t Block::gridToX() const noexcept
+{
+	return static_cast<uint8_t>((block_.getPosition().x - GRID) / GRID);
+}
+
+const uint8_t Block::gridToY() const noexcept
+{
+	return static_cast<uint8_t>((block_.getPosition().y - GRID) / GRID);
 }

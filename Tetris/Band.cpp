@@ -1,6 +1,6 @@
 #include "Band.hpp"
 
-Band::Band(const uint8_t& bandX, const uint8_t& bandY)
+Band::Band(const uint8_t& bandX, const uint8_t& bandY) noexcept
 {
 	band_.setPosition(bandX, bandY);
 	band_.setSize(size_);

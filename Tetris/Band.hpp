@@ -8,7 +8,7 @@ using namespace sf;
 class Band : public sf::Drawable
 {
 public:
-	Band(const uint8_t& bandX, const uint8_t& bandY);
+	Band(const uint8_t& bandX, const uint8_t& bandY) noexcept;
 	Band() = delete;
 	~Band() = default;
 
