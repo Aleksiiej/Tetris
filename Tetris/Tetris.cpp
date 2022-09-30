@@ -19,6 +19,15 @@ int main()
     const Band band{ GRID, GRID };
     const auto blockBoardPtr = make_shared<BlockBoard>();
     Block block{ 5 * GRID, GRID, blockBoardPtr };
+    Font font;
+    font.loadFromFile("arial.ttf");
+    Text lost;
+    lost.setFont(font);
+    lost.setString("You lost!\nClick any button to close game");
+    lost.setCharacterSize(30);
+    lost.setFillColor(Color::Red);
+    lost.setStyle(Text::Bold | Text::Underlined);
+    lost.setPosition(100, 100);
 
     while (true)
     {
@@ -33,6 +42,10 @@ int main()
             if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Right)
             {
                 block.moveRight();
+            }
+            if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Enter)
+            {
+                window.draw(lost);
             }
             if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Left)
             {

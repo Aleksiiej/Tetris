@@ -20,14 +20,18 @@ const bool Block::isFallingPossible() noexcept
 {
 	if (block_.getPosition().y >= GRID * NUMBER_OF_ROWS)
 	{
-		ptrToBlockBoard_->getBoardArrayRef().at(gridToX()).at(gridToY()).block_.setFillColor(Color::Red); //TODO: Owner of this line should be class BlockBoard
+		ptrToBlockBoard_->setFillColor(gridToX(), gridToY(), Color::Red);
 		block_.setPosition(5 * GRID, GRID);
 		return false;
 	}
 	else if (ptrToBlockBoard_->blockBoard_.at(gridToX()).at(gridToY() + 1).block_.getFillColor() != Color::White)
 	{
-		ptrToBlockBoard_->getBoardArrayRef().at(gridToX()).at(gridToY()).block_.setFillColor(Color::Red); //TODO: Owner of this line should be class BlockBoard
+		ptrToBlockBoard_->setFillColor(gridToX(), gridToY(), Color::Red);
 		block_.setPosition(5 * GRID, GRID);
+		return false;
+	}
+	else if (block_.getPosition().y == 0 and !isFallingPossible())
+	{
 		return false;
 	}
 	else return true;

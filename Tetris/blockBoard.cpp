@@ -18,3 +18,8 @@ BoardArray& BlockBoard::getBoardArrayRef() noexcept
 {
     return blockBoard_;
 }
+
+void BlockBoard::setFillColor(const uint8_t& x, const uint8_t& y, const Color& color) noexcept
+{
+    blockBoard_.at(x).at(y).block_.setFillColor(color);
+}
