@@ -5,6 +5,7 @@
 #include "Band.hpp"
 #include "Block.hpp"
 #include "BlockBoard.hpp"
+#include "EndgameText.hpp"
 #include "GlobalValues.hpp"
 
 using namespace sf;
@@ -19,15 +20,7 @@ int main()
     const Band band{ GRID, GRID };
     const auto blockBoardPtr = make_shared<BlockBoard>();
     Block block{ 5 * GRID, GRID, blockBoardPtr };
-    Font font;
-    font.loadFromFile("arial.ttf");
-    Text lost;
-    lost.setFont(font);
-    lost.setString("You lost!\nClick any button to close game");
-    lost.setCharacterSize(30);
-    lost.setFillColor(Color::Red);
-    lost.setStyle(Text::Bold | Text::Underlined);
-    lost.setPosition(100, 100);
+    EndgameText endgameText;
 
     while (true)
     {
@@ -45,7 +38,7 @@ int main()
             }
             if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Enter)
             {
-                window.draw(lost);
+                window.draw(endgameText);
             }
             if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Left)
             {
@@ -54,9 +47,9 @@ int main()
         }
         block.fall();
         window.draw(band);
-        for (const auto& innerArray : blockBoardPtr->getBoardArrayRef())
+        for (auto& innerArray : blockBoardPtr->getBoardArrayRef())
         {
-            for_each(begin(innerArray), end(innerArray), [&window](const auto& block) { window.draw(block.getBlockRef()); });
+            for_each(begin(innerArray), end(innerArray), [&window](auto& block) { window.draw(block.getBlockRef()); });
         }
         window.draw(block);
         window.display();

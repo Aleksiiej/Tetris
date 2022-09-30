@@ -11,9 +11,10 @@ using BoardArray = array<array<Block, NUMBER_OF_ROWS>, NUMBER_OF_COLUMNS>;
 
 class BlockBoard
 {
-	friend class Block;
 public:
 	BlockBoard() noexcept;
+	BlockBoard(const BlockBoard& other) = delete;
+	BlockBoard(const BlockBoard&& other) = delete;
 	~BlockBoard() = default;
 
 	BoardArray& getBoardArrayRef() noexcept;

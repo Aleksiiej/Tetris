@@ -12,10 +12,11 @@ class BlockBoard;
 
 class Block : public Drawable
 {
-	friend class BlockBoard;
 public:
 	Block(const float& blockX, const float& blockY, const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept;
 	Block() = default;
+	Block(const Block& other) = delete;
+	Block(const Block&& other) = delete;
 	~Block() = default;
 
 	void fall() noexcept;
@@ -25,7 +26,7 @@ public:
 	void moveLeft() noexcept;
 	const bool isMoveLeftPossible() const noexcept;
 
-	const RectangleShape& getBlockRef() const noexcept;
+	RectangleShape& getBlockRef() noexcept;
 
 private:
 	RectangleShape block_{};

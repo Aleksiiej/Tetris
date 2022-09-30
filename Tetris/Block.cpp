@@ -24,7 +24,7 @@ const bool Block::isFallingPossible() noexcept
 		block_.setPosition(5 * GRID, GRID);
 		return false;
 	}
-	else if (ptrToBlockBoard_->blockBoard_.at(gridToX()).at(gridToY() + 1).block_.getFillColor() != Color::White)
+	else if (ptrToBlockBoard_->getBoardArrayRef().at(gridToX()).at(gridToY() + 1).block_.getFillColor() != Color::White)
 	{
 		ptrToBlockBoard_->setFillColor(gridToX(), gridToY(), Color::Red);
 		block_.setPosition(5 * GRID, GRID);
@@ -73,7 +73,7 @@ const bool Block::isMoveLeftPossible() const noexcept
 	return true;
 }
 
-const RectangleShape& Block::getBlockRef() const noexcept
+RectangleShape& Block::getBlockRef() noexcept
 {
 	return block_;
 }
