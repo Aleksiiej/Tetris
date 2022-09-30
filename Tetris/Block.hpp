@@ -25,6 +25,7 @@ public:
 	const bool isMoveRightPossible() const noexcept;
 	void moveLeft() noexcept;
 	const bool isMoveLeftPossible() const noexcept;
+	void moveDown() noexcept;
 
 	RectangleShape& getBlockRef() noexcept;
 

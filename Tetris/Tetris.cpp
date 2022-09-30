@@ -36,13 +36,17 @@ int main()
             {
                 block.moveRight();
             }
-            if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Enter)
+            /*if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Enter)
             {
                 window.draw(endgameText);
-            }
+            }*/
             if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Left)
             {
                 block.moveLeft();
+            }
+            if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Down)
+            {
+                block.moveDown();
             }
         }
         block.fall();

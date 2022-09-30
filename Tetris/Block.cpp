@@ -73,6 +73,15 @@ const bool Block::isMoveLeftPossible() const noexcept
 	return true;
 }
 
+void Block::moveDown() noexcept
+{
+	auto& position = block_.getPosition();
+	while (isFallingPossible())
+	{
+		block_.move(0, GRID);
+	}
+}
+
 RectangleShape& Block::getBlockRef() noexcept
 {
 	return block_;
