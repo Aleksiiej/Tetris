@@ -21,32 +21,51 @@ int main()
     const auto blockBoardPtr = make_shared<BlockBoard>();
     Block block{ 5 * GRID, GRID, blockBoardPtr };
     EndgameText endgameText;
+    GameStatus gameStatus{GameStatus::Ongoing};
 
     while (true)
     {
         window.clear(Color::White);
-        while (window.pollEvent(event))
+        if (!block.checkIfLost())
         {
-            if (event.type == Event::EventType::Closed)
+            gameStatus = GameStatus::Lost;
+        }
+        if (gameStatus == GameStatus::Ongoing)
+        {
+            while (window.pollEvent(event))
             {
-                window.close();
-                break;
+                if (event.type == Event::EventType::Closed)
+                {
+                    window.close();
+                    break;
+                }
+                if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Right)
+                {
+                    block.moveRight();
+                }
+                if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Left)
+                {
+                    block.moveLeft();
+                }
+                if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Down)
+                {
+                    block.moveDown();
+                }
             }
-            if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Right)
-            {
-                block.moveRight();
-            }
-            /*if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Enter)
+        }
+        else
+        {
+            window.draw(endgameText);
+            window.display();
+            while (window.pollEvent(event))
             {
                 window.draw(endgameText);
-            }*/
-            if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Left)
-            {
-                block.moveLeft();
-            }
-            if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Down)
-            {
-                block.moveDown();
+                window.display();
+                if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Escape)
+                {
+                    window.close();
+                    break;
+                }
             }
         }
         block.fall();

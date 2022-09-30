@@ -8,6 +8,16 @@ Block::Block(const float& blockX, const float& blockY, const shared_ptr<BlockBoa
 	block_.setFillColor(Color::Red);
 }
 
+bool Block::checkIfLost() const noexcept
+{
+	if (block_.getPosition().y == GRID
+		and ptrToBlockBoard_->getBoardArrayRef().at(gridToX()).at(gridToY()).block_.getFillColor() == Color::Red)
+	{
+		return false;
+	}
+	return true;
+}
+
 void Block::fall() noexcept
 {
 	if (isFallingPossible())

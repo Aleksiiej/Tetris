@@ -4,7 +4,7 @@ EndgameText::EndgameText() noexcept
 {
     font_.loadFromFile("arial.ttf");
     text_.setFont(font_);
-    text_.setString("You loose!\nClick any button to close game");
+    text_.setString("You loose!\nClick ESCAPE button to close game");
     text_.setCharacterSize(24);
     text_.setFillColor(Color::Red);
     text_.setStyle(Text::Bold | Text::Underlined);

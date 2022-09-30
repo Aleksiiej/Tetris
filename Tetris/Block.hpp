@@ -19,6 +19,7 @@ public:
 	Block(const Block&& other) = delete;
 	~Block() = default;
 
+	bool checkIfLost() const noexcept;
 	void fall() noexcept;
 	const bool isFallingPossible() noexcept;
 	void moveRight() noexcept;
