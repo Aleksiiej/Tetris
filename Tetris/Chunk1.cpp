@@ -1,12 +1,44 @@
 #include "Chunk1.hpp"
 
-bool Chunk1::checkIfLost() const noexcept
+Chunk1::Chunk1()
 {
+	block1_.setPosition((NUMBER_OF_COLUMNS / 2) * GRID, GRID);
+	block1_.setSize(Vector2f{ GRID, GRID });
+	block1_.setFillColor(Color::Red);
+
+	block2_.setPosition((NUMBER_OF_COLUMNS / 2) * GRID + GRID, GRID);
+	block2_.setSize(Vector2f{ GRID, GRID });
+	block2_.setFillColor(Color::Red);
+
+	block3_.setPosition((NUMBER_OF_COLUMNS / 2) * GRID, 2 * GRID);
+	block3_.setSize(Vector2f{ GRID, GRID });
+	block3_.setFillColor(Color::Red);
+
+	block4_.setPosition((NUMBER_OF_COLUMNS / 2) * GRID + GRID, 2 * GRID);
+	block4_.setSize(Vector2f{ GRID, GRID });
+	block4_.setFillColor(Color::Red);
+}
+
+bool Chunk1::checkIfLost() const noexcept // TODO: Write this function
+{
+	/*if (block1_.getPosition().y == GRID
+	  and ptrToBlockBoard_->getBoardArrayRef().at(gridToX()).at(gridToY()).block_.getFillColor() == Color::Red)
+	{
+	   return false;
+	}*/
 	return true;
 }
 
 void Chunk1::fall() noexcept
-{}
+{
+	//if (isFallingPossible())
+	//{
+	//	block1_.move(0, GRID);
+	//	block2_.move(0, GRID);
+	//	block3_.move(0, GRID);
+	//	block4_.move(0, GRID);
+	//}
+}
 
 bool Chunk1::isFallingPossible() const noexcept
 {

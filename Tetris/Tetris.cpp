@@ -5,6 +5,7 @@
 #include "Band.hpp"
 #include "Block.hpp"
 #include "BlockBoard.hpp"
+#include "Chunk1.hpp"
 #include "EndgameText.hpp"
 #include "GlobalValues.hpp"
 
@@ -20,6 +21,7 @@ int main()
     const Band band{ GRID, GRID };
     const auto blockBoardPtr = make_shared<BlockBoard>();
     Block block{ 5 * GRID, GRID, blockBoardPtr };
+    Chunk1 chunk1;
     EndgameText endgameText;
     GameStatus gameStatus{GameStatus::Ongoing};
 
@@ -73,6 +75,10 @@ int main()
             for_each(begin(innerArray), end(innerArray), [&window](auto& block) { window.draw(block.getBlockRef()); });
         }
         window.draw(block);
+        window.draw(chunk1.block1_);
+        window.draw(chunk1.block2_);
+        window.draw(chunk1.block3_);
+        window.draw(chunk1.block4_);
         window.display();
         sleep(milliseconds(GAME_SPEED));
         block.fall();
