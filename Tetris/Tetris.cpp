@@ -55,20 +55,18 @@ int main()
         }
         else
         {
+            window.draw(band);
+            for (auto& innerArray : blockBoardPtr->getBoardArrayRef())
+            {
+                for_each(begin(innerArray), end(innerArray), [&window](auto& block) { window.draw(block.getBlockRef()); });
+            }
+            window.draw(block);
             window.draw(endgameText);
             window.display();
-            while (window.pollEvent(event))
-            {
-                window.draw(endgameText);
-                window.display();
-                if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Escape)
-                {
-                    window.close();
-                    break;
-                }
-            }
+            sleep(milliseconds(2000));
+            window.close();
+            return 0;
         }
-        block.fall();
         window.draw(band);
         for (auto& innerArray : blockBoardPtr->getBoardArrayRef())
         {
@@ -77,6 +75,7 @@ int main()
         window.draw(block);
         window.display();
         sleep(milliseconds(GAME_SPEED));
+        block.fall();
     }
     return 0;
 }

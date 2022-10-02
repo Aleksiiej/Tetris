@@ -85,7 +85,6 @@ const bool Block::isMoveLeftPossible() const noexcept
 
 void Block::moveDown() noexcept
 {
-	auto& position = block_.getPosition();
 	while (isFallingPossible())
 	{
 		block_.move(0, GRID);
