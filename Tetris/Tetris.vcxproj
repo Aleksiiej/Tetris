@@ -154,7 +154,6 @@
     <ClCompile Include="Band.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="BlockBoard.cpp" />
-    <ClCompile Include="Chunk1.cpp" />
     <ClCompile Include="EndgameText.cpp" />
     <ClCompile Include="Tetris.cpp" />
   </ItemGroup>
@@ -162,10 +161,8 @@
     <ClInclude Include="Band.hpp" />
     <ClInclude Include="Block.hpp" />
     <ClInclude Include="BlockBoard.hpp" />
-    <ClInclude Include="Chunk1.hpp" />
     <ClInclude Include="EndgameText.hpp" />
     <ClInclude Include="GlobalValues.hpp" />
-    <ClInclude Include="IChunk.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
