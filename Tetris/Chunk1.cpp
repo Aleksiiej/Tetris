@@ -1,6 +1,6 @@
 #include "Chunk1.hpp"
 
-Chunk1::Chunk1()
+Chunk1::Chunk1() noexcept
 {
 	block1_.setPosition((NUMBER_OF_COLUMNS / 2) * GRID, GRID);
 	block1_.setSize(Vector2f{ GRID, GRID });
@@ -19,7 +19,7 @@ Chunk1::Chunk1()
 	block4_.setFillColor(Color::Red);
 }
 
-bool Chunk1::checkIfLost() const noexcept // TODO: Write this function
+const bool Chunk1::checkIfLost() const noexcept // TODO: Write this function
 {
 	/*if (block1_.getPosition().y == GRID
 	  and ptrToBlockBoard_->getBoardArrayRef().at(gridToX()).at(gridToY()).block_.getFillColor() == Color::Red)
@@ -40,7 +40,7 @@ void Chunk1::fall() noexcept
 	//}
 }
 
-bool Chunk1::isFallingPossible() const noexcept
+const bool Chunk1::isFallingPossible() const noexcept
 {
 	return true;
 }
@@ -48,7 +48,7 @@ bool Chunk1::isFallingPossible() const noexcept
 void Chunk1::moveRight() noexcept
 {}
 
-bool Chunk1::isMoveRightPossible() const noexcept
+const bool Chunk1::isMoveRightPossible() const noexcept
 {
 	return true;
 }
@@ -56,7 +56,62 @@ bool Chunk1::isMoveRightPossible() const noexcept
 void Chunk1::moveLeft() noexcept
 {}
 
-bool Chunk1::isMoveLeftPossible() const noexcept
+const bool Chunk1::isMoveLeftPossible() const noexcept
 {
 	return true;
+}
+
+RectangleShape& Chunk1::getBlock1Ref() noexcept
+{
+	return block1_;
+}
+
+RectangleShape& Chunk1::getBlock2Ref() noexcept
+{
+	return block2_;
+}
+
+RectangleShape& Chunk1::getBlock3Ref() noexcept
+{
+	return block3_;
+}
+
+RectangleShape& Chunk1::getBlock4Ref() noexcept
+{
+	return block4_;
+}
+
+
+const uint8_t Chunk1::gridToX(uint8_t blockNumber) const noexcept
+{
+	switch (blockNumber)
+	{
+	case 1:
+		return static_cast<uint8_t>((block1_.getPosition().x - GRID) / GRID);
+	case 2:
+		return static_cast<uint8_t>((block2_.getPosition().x - GRID) / GRID);
+	case 3:
+		return static_cast<uint8_t>((block3_.getPosition().x - GRID) / GRID);
+	case 4:
+		return static_cast<uint8_t>((block4_.getPosition().x - GRID) / GRID);
+	default:
+		return 0;
+	}
+}
+
+const uint8_t Chunk1::gridToY(uint8_t blockNumber) const noexcept
+{
+	switch (blockNumber)
+	{
+	case 1:
+		return static_cast<uint8_t>((block1_.getPosition().y - GRID) / GRID);
+	case 2:
+		return static_cast<uint8_t>((block2_.getPosition().y - GRID) / GRID);
+	case 3:
+		return static_cast<uint8_t>((block3_.getPosition().y - GRID) / GRID);
+	case 4:
+		return static_cast<uint8_t>((block4_.getPosition().y - GRID) / GRID);
+	default:
+		return 0;
+	}
 }
