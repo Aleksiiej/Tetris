@@ -18,7 +18,7 @@ Chunk1::Chunk1(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept : ptrToBl
 	block4_.setPosition((NUMBER_OF_COLUMNS / 2) * GRID + GRID, 2 * GRID);
 	block4_.setSize(Vector2f{ GRID, GRID });
 	block4_.setFillColor(Color::Red);
-}
+const bool Chunk1::checkIfLost() const noexcept
 
 const bool Chunk1::checkIfLost() const noexcept // TODO: Write this function
 {
