@@ -21,7 +21,7 @@ int main()
     const Band band{ GRID, GRID };
     const auto blockBoardPtr = make_shared<BlockBoard>();
     Block block{ 5 * GRID, GRID, blockBoardPtr };
-    Chunk1 chunk1;
+    Chunk1 chunk1{blockBoardPtr};
     EndgameText endgameText;
     GameStatus gameStatus{GameStatus::Ongoing};
 
