@@ -20,7 +20,7 @@ Chunk1::Chunk1(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept : ptrToBl
 	block4_.setFillColor(Color::Red);
 }
 
-const bool Chunk1::checkIfLost() const noexcept
+const bool Chunk1::checkIfLost() const noexcept // TODO: Write this function
 {
 	if (block1_.getPosition().y == GRID // TODO: Make this condition shorter
 	  and ( ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3)).at(gridToY(3)).getBlockRef().getFillColor() == Color::Red
@@ -66,8 +66,9 @@ const bool Chunk1::isFallingPossible() noexcept
 	{
 		return false;
 	}*/
-	else return true;
+	return true;
 }
+
 
 void Chunk1::moveRight() noexcept
 {}
