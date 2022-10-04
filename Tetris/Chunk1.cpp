@@ -2,6 +2,8 @@
 #include "BlockBoard.hpp"
 
 Chunk1::Chunk1(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept : ptrToBlockBoard_(ptrToBlockBoard)
+<<<<<<<<< Temporary merge branch 1
+<<<<<<<<< Temporary merge branch 1
 {
 	block1_.setPosition((NUMBER_OF_COLUMNS / 2) * GRID, GRID);
 	block1_.setSize(Vector2f{ GRID, GRID });
@@ -18,9 +20,9 @@ Chunk1::Chunk1(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept : ptrToBl
 	block4_.setPosition((NUMBER_OF_COLUMNS / 2) * GRID + GRID, 2 * GRID);
 	block4_.setSize(Vector2f{ GRID, GRID });
 	block4_.setFillColor(Color::Red);
-}
-
 const bool Chunk1::checkIfLost() const noexcept
+
+bool Chunk1::checkIfLost() const noexcept // TODO: Write this function
 {
 	if (block1_.getPosition().y == GRID // TODO: Make this condition shorter
 	  and ( ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3)).at(gridToY(3)).getBlockRef().getFillColor() == Color::Red
@@ -40,8 +42,6 @@ void Chunk1::fall() noexcept
 		block3_.move(0, GRID);
 		block4_.move(0, GRID);
 	}
-}
-
 const bool Chunk1::isFallingPossible() noexcept
 {
 	if (block3_.getPosition().y >= GRID * NUMBER_OF_ROWS and block4_.getPosition().y >= GRID * NUMBER_OF_ROWS)
@@ -67,6 +67,8 @@ const bool Chunk1::isFallingPossible() noexcept
 		return false;
 	}*/
 	else return true;
+{
+	return true;
 }
 
 void Chunk1::moveRight() noexcept
