@@ -18,9 +18,9 @@ Chunk1::Chunk1(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept : ptrToBl
 	block4_.setPosition((NUMBER_OF_COLUMNS / 2) * GRID + GRID, 2 * GRID);
 	block4_.setSize(Vector2f{ GRID, GRID });
 	block4_.setFillColor(Color::Red);
-const bool Chunk1::checkIfLost() const noexcept
+}
 
-const bool Chunk1::checkIfLost() const noexcept // TODO: Write this function
+const bool Chunk1::checkIfLost() const noexcept
 {
 	if (block1_.getPosition().y == GRID // TODO: Make this condition shorter
 	  and ( ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3)).at(gridToY(3)).getBlockRef().getFillColor() == Color::Red
@@ -46,7 +46,7 @@ const bool Chunk1::isFallingPossible() noexcept
 {
 	if (block3_.getPosition().y >= GRID * NUMBER_OF_ROWS and block4_.getPosition().y >= GRID * NUMBER_OF_ROWS)
 	{
-		for (int i = 1; i++; i < 5)
+		for (int i = 1; i < 5; i++)
 		{
 		    ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), Color::Red);
 		}
@@ -56,13 +56,20 @@ const bool Chunk1::isFallingPossible() noexcept
 		block4_.setPosition((NUMBER_OF_COLUMNS / 2) * GRID + GRID, 2 * GRID);
 		return false;
 	}
-	/*else if (ptrToBlockBoard_->getBoardArrayRef().at(gridToX()).at(gridToY() + 1).block_.getFillColor() != Color::White)
+	else if (ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3)).at(gridToY(3) + 1).getBlockRef().getFillColor() != Color::White
+		     or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(4)).at(gridToY(4) + 1).getBlockRef().getFillColor() != Color::White)
 	{
-		ptrToBlockBoard_->setFillColor(gridToX(), gridToY(), Color::Red);
-		block_.setPosition(5 * GRID, GRID);
+		for (int i = 1; i < 5; i++)
+		{
+			ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), Color::Red);
+		}
+		block1_.setPosition((NUMBER_OF_COLUMNS / 2) * GRID, GRID);
+		block2_.setPosition((NUMBER_OF_COLUMNS / 2) * GRID + GRID, GRID);
+		block3_.setPosition((NUMBER_OF_COLUMNS / 2) * GRID, 2 * GRID);
+		block4_.setPosition((NUMBER_OF_COLUMNS / 2) * GRID + GRID, 2 * GRID);
 		return false;
 	}
-	else if (block_.getPosition().y == 0 and !isFallingPossible())
+	/*else if (block_.getPosition().y == 0 and !isFallingPossible())
 	{
 		return false;
 	}*/
@@ -71,19 +78,58 @@ const bool Chunk1::isFallingPossible() noexcept
 
 
 void Chunk1::moveRight() noexcept
-{}
+{
+	if (isMoveRightPossible())
+	{
+		block1_.move(GRID, 0);
+		block2_.move(GRID, 0);
+		block3_.move(GRID, 0);
+		block4_.move(GRID, 0);
+	}
+}
 
 const bool Chunk1::isMoveRightPossible() const noexcept
 {
+	if (block2_.getPosition().x >= GRID * NUMBER_OF_COLUMNS
+		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(2) + 1).at(gridToY(2)).getBlockRef().getFillColor() != Color::White
+		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(4) + 1).at(gridToY(4)).getBlockRef().getFillColor() != Color::White)
+	{
+		return false;
+	}
 	return true;
 }
 
 void Chunk1::moveLeft() noexcept
-{}
+{
+	if (isMoveLeftPossible())
+	{
+		block1_.move(-GRID, 0);
+		block2_.move(-GRID, 0);
+		block3_.move(-GRID, 0);
+		block4_.move(-GRID, 0);
+	}
+}
 
 const bool Chunk1::isMoveLeftPossible() const noexcept
 {
+	if (block1_.getPosition().x <= GRID
+		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(1) - 1).at(gridToY(1)).getBlockRef().getFillColor() != Color::White
+		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3) - 1).at(gridToY(3)).getBlockRef().getFillColor() != Color::White)
+	{
+		return false;
+	}
 	return true;
+}
+
+void Chunk1::moveDown() noexcept
+{
+	while (isFallingPossible())
+	{
+		block1_.move(0, GRID);
+		block2_.move(0, GRID);
+		block3_.move(0, GRID);
+		block4_.move(0, GRID);
+	}
 }
 
 RectangleShape& Chunk1::getBlock1Ref() noexcept

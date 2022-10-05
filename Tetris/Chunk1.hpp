@@ -27,6 +27,7 @@ public:
 	const bool isMoveRightPossible() const noexcept override;
 	void moveLeft() noexcept override;
 	const bool isMoveLeftPossible() const noexcept override;
+	void moveDown() noexcept override;
 
 	RectangleShape& getBlock1Ref() noexcept;
 	RectangleShape& getBlock2Ref() noexcept;
