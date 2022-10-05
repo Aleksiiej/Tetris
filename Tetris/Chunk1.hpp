@@ -27,12 +27,13 @@ public:
 	const bool isMoveRightPossible() const noexcept override;
 	void moveLeft() noexcept override;
 	const bool isMoveLeftPossible() const noexcept override;
+	void moveDown() noexcept override;
 
 	RectangleShape& getBlock1Ref() noexcept;
 	RectangleShape& getBlock2Ref() noexcept;
 	RectangleShape& getBlock3Ref() noexcept;
 	RectangleShape& getBlock4Ref() noexcept;
-//private:
+private:
 	RectangleShape block1_{}; // *--*
 	RectangleShape block2_{}; // |12|
 	RectangleShape block3_{}; // |34|

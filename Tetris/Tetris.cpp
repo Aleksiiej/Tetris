@@ -20,7 +20,6 @@ int main()
 
     const Band band{ GRID, GRID };
     const auto blockBoardPtr = make_shared<BlockBoard>();
-    Block block{ 5 * GRID, GRID, blockBoardPtr };
     Chunk1 chunk1{blockBoardPtr};
     EndgameText endgameText;
     GameStatus gameStatus{GameStatus::Ongoing};
@@ -28,7 +27,7 @@ int main()
     while (true)
     {
         window.clear(Color::White);
-        if (!block.checkIfLost())
+        if (!chunk1.checkIfLost())
         {
             gameStatus = GameStatus::Lost;
         }
@@ -43,15 +42,15 @@ int main()
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Right)
                 {
-                    block.moveRight();
+                    chunk1.moveRight();
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Left)
                 {
-                    block.moveLeft();
+                    chunk1.moveLeft();
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Down)
                 {
-                    block.moveDown();
+                    chunk1.moveDown();
                 }
             }
         }
@@ -62,7 +61,6 @@ int main()
             {
                 for_each(begin(innerArray), end(innerArray), [&window](auto& block) { window.draw(block.getBlockRef()); });
             }
-            window.draw(block);
             window.draw(endgameText);
             window.display();
             sleep(milliseconds(2000));
@@ -74,14 +72,13 @@ int main()
         {
             for_each(begin(innerArray), end(innerArray), [&window](auto& block) { window.draw(block.getBlockRef()); });
         }
-        window.draw(block);
-        window.draw(chunk1.block1_);
-        window.draw(chunk1.block2_);
-        window.draw(chunk1.block3_);
-        window.draw(chunk1.block4_);
+        window.draw(chunk1.getBlock1Ref());
+        window.draw(chunk1.getBlock2Ref());
+        window.draw(chunk1.getBlock3Ref());
+        window.draw(chunk1.getBlock4Ref());
         window.display();
         sleep(milliseconds(GAME_SPEED));
-        block.fall();
+        chunk1.fall();
     }
     return 0;
 }
