@@ -37,10 +37,10 @@ void Block1::fall() noexcept
 {
 	if (isFallingPossible())
 	{
-		block1Array_.at(0).move(0, GRID);
-		block1Array_.at(1).move(0, GRID);
-		block1Array_.at(2).move(0, GRID);
-		block1Array_.at(3).move(0, GRID);
+		for (int i = 0; i < 4; i++)
+		{
+			block1Array_.at(i).move(0, GRID);
+		}
 	}
 }
 
@@ -52,10 +52,7 @@ const bool Block1::isFallingPossible() noexcept
 		{
 		    ptrToBlockBoard_->setFillColor(gridToX(i + 1), gridToY(i), Color::Red);
 		}
-		block1Array_.at(0).setPosition((NUMBER_OF_COLUMNS / 2) * GRID, GRID);
-		block1Array_.at(1).setPosition((NUMBER_OF_COLUMNS / 2) * GRID + GRID, GRID);
-		block1Array_.at(2).setPosition((NUMBER_OF_COLUMNS / 2) * GRID, 2 * GRID);
-		block1Array_.at(3).setPosition((NUMBER_OF_COLUMNS / 2) * GRID + GRID, 2 * GRID);
+		setBLockAtStartingPosition();
 		return false;
 	}
 	else if (ptrToBlockBoard_->getBoardArrayRef().at(gridToX(2)).at(gridToY(2) + 1).getFillColor() != Color::White
@@ -65,10 +62,7 @@ const bool Block1::isFallingPossible() noexcept
 		{
 			ptrToBlockBoard_->setFillColor(gridToX(i + 1), gridToY(i), Color::Red);
 		}
-		block1Array_.at(0).setPosition((NUMBER_OF_COLUMNS / 2) * GRID, GRID);
-		block1Array_.at(1).setPosition((NUMBER_OF_COLUMNS / 2) * GRID + GRID, GRID);
-		block1Array_.at(2).setPosition((NUMBER_OF_COLUMNS / 2) * GRID, 2 * GRID);
-		block1Array_.at(3).setPosition((NUMBER_OF_COLUMNS / 2) * GRID + GRID, 2 * GRID);
+		setBLockAtStartingPosition();
 		return false;
 	}
 	return true;
@@ -79,10 +73,10 @@ void Block1::moveRight() noexcept
 {
 	if (isMoveRightPossible())
 	{
-		block1Array_.at(0).move(GRID, 0);
-		block1Array_.at(1).move(GRID, 0);
-		block1Array_.at(2).move(GRID, 0);
-		block1Array_.at(3).move(GRID, 0);
+		for (int i = 0; i < 4; i++)
+		{
+			block1Array_.at(i).move(GRID, 0);
+		}
 	}
 }
 
@@ -101,10 +95,10 @@ void Block1::moveLeft() noexcept
 {
 	if (isMoveLeftPossible())
 	{
-		block1Array_.at(0).move(-GRID, 0);
-		block1Array_.at(1).move(-GRID, 0);
-		block1Array_.at(2).move(-GRID, 0);
-		block1Array_.at(3).move(-GRID, 0);
+		for (int i = 0; i < 4; i++)
+		{
+			block1Array_.at(i).move(-GRID, 0);
+		}
 	}
 }
 
@@ -123,10 +117,10 @@ void Block1::moveDown() noexcept
 {
 	while (isFallingPossible())
 	{
-		block1Array_.at(0).move(0, GRID);
-		block1Array_.at(1).move(0, GRID);
-		block1Array_.at(2).move(0, GRID);
-		block1Array_.at(3).move(0, GRID);
+		for (int i = 0; i < 4; i++)
+		{
+			block1Array_.at(i).move(0, GRID);
+		}
 	}
 }
 
@@ -167,4 +161,12 @@ const uint8_t Block1::gridToY(uint8_t blockNumber) const noexcept
 	default:
 		return 0;
 	}
+}
+
+void Block1::setBLockAtStartingPosition() noexcept
+{
+	block1Array_.at(0).setPosition((NUMBER_OF_COLUMNS / 2) * GRID, GRID);
+	block1Array_.at(1).setPosition((NUMBER_OF_COLUMNS / 2) * GRID + GRID, GRID);
+	block1Array_.at(2).setPosition((NUMBER_OF_COLUMNS / 2) * GRID, 2 * GRID);
+	block1Array_.at(3).setPosition((NUMBER_OF_COLUMNS / 2) * GRID + GRID, 2 * GRID);
 }

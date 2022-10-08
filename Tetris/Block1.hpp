@@ -37,6 +37,7 @@ private:
 
 	const uint8_t gridToX(uint8_t blockNumber) const noexcept;
 	const uint8_t gridToY(uint8_t blockNumber) const noexcept;
+	void setBLockAtStartingPosition() noexcept override;
 };
 
 // *--*
