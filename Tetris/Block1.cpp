@@ -50,7 +50,7 @@ const bool Block1::isFallingPossible() noexcept
 	{
 		for (int i = 0; i < 4; i++)
 		{
-		    ptrToBlockBoard_->setFillColor(gridToX(i + 1), gridToY(i), Color::Red);
+		    ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), Color::Red);
 		}
 		setBLockAtStartingPosition();
 		return false;
@@ -60,7 +60,7 @@ const bool Block1::isFallingPossible() noexcept
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			ptrToBlockBoard_->setFillColor(gridToX(i + 1), gridToY(i), Color::Red);
+			ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), Color::Red);
 		}
 		setBLockAtStartingPosition();
 		return false;
@@ -133,16 +133,16 @@ const uint8_t Block1::gridToX(uint8_t blockNumber) const noexcept
 {
 	switch (blockNumber)
 	{
-	case 1:
+	case 0:
 		return static_cast<uint8_t>((block1Array_.at(0).getPosition().x - GRID) / GRID);
-	case 2:
+	case 1:
 		return static_cast<uint8_t>((block1Array_.at(1).getPosition().x - GRID) / GRID);
-	case 3:
+	case 2:
 		return static_cast<uint8_t>((block1Array_.at(2).getPosition().x - GRID) / GRID);
-	case 4:
+	case 3:
 		return static_cast<uint8_t>((block1Array_.at(3).getPosition().x - GRID) / GRID);
 	default:
-		return 0;
+		return 255;
 	}
 }
 
@@ -159,7 +159,7 @@ const uint8_t Block1::gridToY(uint8_t blockNumber) const noexcept
 	case 3:
 		return static_cast<uint8_t>((block1Array_.at(3).getPosition().y - GRID) / GRID);
 	default:
-		return 0;
+		return 255;
 	}
 }
 

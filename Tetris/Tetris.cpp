@@ -20,7 +20,7 @@ int main()
     const Band band{ GRID, GRID };
     const auto blockBoardPtr = make_shared<BlockBoard>();
     Block1 Block1{blockBoardPtr};
-    EndgameText endgameText;
+    const EndgameText endgameText;
     GameStatus gameStatus{GameStatus::Ongoing};
 
     while (true)
