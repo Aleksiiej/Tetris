@@ -4,21 +4,21 @@
 #include <memory>
 
 #include "GlobalValues.hpp"
-#include "IChunk.hpp"
+#include "IBlock.hpp"
 
 using namespace sf;
 using namespace std;
 
 class BlockBoard;
 
-class Chunk1 : public IChunk
+class Block1 : public IBlock
 {
 public:
-	Chunk1() = delete;
-	Chunk1(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept;
-	Chunk1(const Chunk1& other) = delete;
-	Chunk1(const Chunk1&& other) = delete;
-	~Chunk1() = default;
+	Block1() = delete;
+	Block1(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept;
+	Block1(const Block1& other) = delete;
+	Block1(const Block1&& other) = delete;
+	~Block1() = default;
 
 	const bool checkIfLost() const noexcept override;
 	void fall() noexcept override;

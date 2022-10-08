@@ -1,10 +1,10 @@
 #pragma once
 
-class IChunk
+class IBlock
 {
 public:
-	IChunk() = default;
-	~IChunk() = default;
+	IBlock() = default;
+	~IBlock() = default;
 	virtual const bool checkIfLost() const noexcept = 0;
 	virtual void fall() noexcept = 0;
 	virtual const bool isFallingPossible() noexcept = 0;
