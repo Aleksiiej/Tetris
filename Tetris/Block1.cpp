@@ -1,7 +1,7 @@
-#include "Chunk1.hpp"
+#include "Block1.hpp"
 #include "BlockBoard.hpp"
 
-Chunk1::Chunk1(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept : ptrToBlockBoard_(ptrToBlockBoard)
+Block1::Block1(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept : ptrToBlockBoard_(ptrToBlockBoard)
 {
 	block1_.setPosition((NUMBER_OF_COLUMNS / 2) * GRID, GRID);
 	block1_.setSize(Vector2f{ GRID, GRID });
@@ -20,18 +20,18 @@ Chunk1::Chunk1(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept : ptrToBl
 	block4_.setFillColor(Color::Red);
 }
 
-const bool Chunk1::checkIfLost() const noexcept
+const bool Block1::checkIfLost() const noexcept
 {
 	if (block1_.getPosition().y == GRID // TODO: Make this condition shorter
-	  and ( ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3)).at(gridToY(3)).getBlockRef().getFillColor() == Color::Red
-	  or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(4)).at(gridToY(4)).getBlockRef().getFillColor() == Color::Red))
+	  and ( ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3)).at(gridToY(3)).getFillColor() == Color::Red
+	  or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(4)).at(gridToY(4)).getFillColor() == Color::Red))
 	{
 	   return false;
 	}
 	return true;
 }
 
-void Chunk1::fall() noexcept
+void Block1::fall() noexcept
 {
 	if (isFallingPossible())
 	{
@@ -42,7 +42,7 @@ void Chunk1::fall() noexcept
 	}
 }
 
-const bool Chunk1::isFallingPossible() noexcept
+const bool Block1::isFallingPossible() noexcept
 {
 	if (block3_.getPosition().y >= GRID * NUMBER_OF_ROWS and block4_.getPosition().y >= GRID * NUMBER_OF_ROWS)
 	{
@@ -56,8 +56,8 @@ const bool Chunk1::isFallingPossible() noexcept
 		block4_.setPosition((NUMBER_OF_COLUMNS / 2) * GRID + GRID, 2 * GRID);
 		return false;
 	}
-	else if (ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3)).at(gridToY(3) + 1).getBlockRef().getFillColor() != Color::White
-		     or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(4)).at(gridToY(4) + 1).getBlockRef().getFillColor() != Color::White)
+	else if (ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3)).at(gridToY(3) + 1).getFillColor() != Color::White
+		     or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(4)).at(gridToY(4) + 1).getFillColor() != Color::White)
 	{
 		for (int i = 1; i < 5; i++)
 		{
@@ -73,7 +73,7 @@ const bool Chunk1::isFallingPossible() noexcept
 }
 
 
-void Chunk1::moveRight() noexcept
+void Block1::moveRight() noexcept
 {
 	if (isMoveRightPossible())
 	{
@@ -84,18 +84,18 @@ void Chunk1::moveRight() noexcept
 	}
 }
 
-const bool Chunk1::isMoveRightPossible() const noexcept
+const bool Block1::isMoveRightPossible() const noexcept
 {
 	if (block2_.getPosition().x >= GRID * NUMBER_OF_COLUMNS
-		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(2) + 1).at(gridToY(2)).getBlockRef().getFillColor() != Color::White
-		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(4) + 1).at(gridToY(4)).getBlockRef().getFillColor() != Color::White)
+		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(2) + 1).at(gridToY(2)).getFillColor() != Color::White
+		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(4) + 1).at(gridToY(4)).getFillColor() != Color::White)
 	{
 		return false;
 	}
 	return true;
 }
 
-void Chunk1::moveLeft() noexcept
+void Block1::moveLeft() noexcept
 {
 	if (isMoveLeftPossible())
 	{
@@ -106,18 +106,18 @@ void Chunk1::moveLeft() noexcept
 	}
 }
 
-const bool Chunk1::isMoveLeftPossible() const noexcept
+const bool Block1::isMoveLeftPossible() const noexcept
 {
 	if (block1_.getPosition().x <= GRID
-		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(1) - 1).at(gridToY(1)).getBlockRef().getFillColor() != Color::White
-		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3) - 1).at(gridToY(3)).getBlockRef().getFillColor() != Color::White)
+		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(1) - 1).at(gridToY(1)).getFillColor() != Color::White
+		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3) - 1).at(gridToY(3)).getFillColor() != Color::White)
 	{
 		return false;
 	}
 	return true;
 }
 
-void Chunk1::moveDown() noexcept
+void Block1::moveDown() noexcept
 {
 	while (isFallingPossible())
 	{
@@ -128,28 +128,28 @@ void Chunk1::moveDown() noexcept
 	}
 }
 
-RectangleShape& Chunk1::getBlock1Ref() noexcept
+RectangleShape& Block1::getBlock1Ref() noexcept
 {
 	return block1_;
 }
 
-RectangleShape& Chunk1::getBlock2Ref() noexcept
+RectangleShape& Block1::getBlock2Ref() noexcept
 {
 	return block2_;
 }
 
-RectangleShape& Chunk1::getBlock3Ref() noexcept
+RectangleShape& Block1::getBlock3Ref() noexcept
 {
 	return block3_;
 }
 
-RectangleShape& Chunk1::getBlock4Ref() noexcept
+RectangleShape& Block1::getBlock4Ref() noexcept
 {
 	return block4_;
 }
 
 
-const uint8_t Chunk1::gridToX(uint8_t blockNumber) const noexcept
+const uint8_t Block1::gridToX(uint8_t blockNumber) const noexcept
 {
 	switch (blockNumber)
 	{
@@ -166,7 +166,7 @@ const uint8_t Chunk1::gridToX(uint8_t blockNumber) const noexcept
 	}
 }
 
-const uint8_t Chunk1::gridToY(uint8_t blockNumber) const noexcept
+const uint8_t Block1::gridToY(uint8_t blockNumber) const noexcept
 {
 	switch (blockNumber)
 	{

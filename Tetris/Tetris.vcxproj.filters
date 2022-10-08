@@ -21,24 +21,18 @@
     <ClCompile Include="Band.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Block.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BlockBoard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EndgameText.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Chunk1.cpp">
+    <ClCompile Include="Block1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Band.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Block.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BlockBoard.hpp">
@@ -50,10 +44,10 @@
     <ClInclude Include="EndgameText.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IChunk.hpp">
+    <ClInclude Include="IBlock.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Chunk1.hpp">
+    <ClInclude Include="Block1.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

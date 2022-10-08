@@ -3,9 +3,8 @@
 #include <memory>
 
 #include "Band.hpp"
-#include "Block.hpp"
 #include "BlockBoard.hpp"
-#include "Chunk1.hpp"
+#include "Block1.hpp"
 #include "EndgameText.hpp"
 #include "GlobalValues.hpp"
 
@@ -20,14 +19,14 @@ int main()
 
     const Band band{ GRID, GRID };
     const auto blockBoardPtr = make_shared<BlockBoard>();
-    Chunk1 chunk1{blockBoardPtr};
+    Block1 Block1{blockBoardPtr};
     EndgameText endgameText;
     GameStatus gameStatus{GameStatus::Ongoing};
 
     while (true)
     {
         window.clear(Color::White);
-        if (!chunk1.checkIfLost())
+        if (!Block1.checkIfLost())
         {
             gameStatus = GameStatus::Lost;
         }
@@ -42,15 +41,15 @@ int main()
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Right)
                 {
-                    chunk1.moveRight();
+                    Block1.moveRight();
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Left)
                 {
-                    chunk1.moveLeft();
+                    Block1.moveLeft();
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Down)
                 {
-                    chunk1.moveDown();
+                    Block1.moveDown();
                 }
             }
         }
@@ -59,7 +58,7 @@ int main()
             window.draw(band);
             for (auto& innerArray : blockBoardPtr->getBoardArrayRef())
             {
-                for_each(begin(innerArray), end(innerArray), [&window](auto& block) { window.draw(block.getBlockRef()); });
+                for_each(begin(innerArray), end(innerArray), [&window](auto& block) { window.draw(block); });
             }
             window.draw(endgameText);
             window.display();
@@ -70,15 +69,15 @@ int main()
         window.draw(band);
         for (auto& innerArray : blockBoardPtr->getBoardArrayRef())
         {
-            for_each(begin(innerArray), end(innerArray), [&window](auto& block) { window.draw(block.getBlockRef()); });
+            for_each(begin(innerArray), end(innerArray), [&window](auto& block) { window.draw(block); });
         }
-        window.draw(chunk1.getBlock1Ref());
-        window.draw(chunk1.getBlock2Ref());
-        window.draw(chunk1.getBlock3Ref());
-        window.draw(chunk1.getBlock4Ref());
+        window.draw(Block1.getBlock1Ref());
+        window.draw(Block1.getBlock2Ref());
+        window.draw(Block1.getBlock3Ref());
+        window.draw(Block1.getBlock4Ref());
         window.display();
         sleep(milliseconds(GAME_SPEED));
-        chunk1.fall();
+        Block1.fall();
     }
     return 0;
 }
