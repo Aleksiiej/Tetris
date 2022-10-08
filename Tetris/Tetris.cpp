@@ -1,6 +1,6 @@
+#include <memory>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
-#include <memory>
 
 #include "Band.hpp"
 #include "BlockBoard.hpp"
@@ -71,10 +71,10 @@ int main()
         {
             for_each(begin(innerArray), end(innerArray), [&window](const auto& block) { window.draw(block); });
         }
-        window.draw(Block1.getBlock1Ref());
-        window.draw(Block1.getBlock2Ref());
-        window.draw(Block1.getBlock3Ref());
-        window.draw(Block1.getBlock4Ref());
+        for (const auto& block : Block1.getBlock1ArrayRef())
+        {
+            window.draw(block);
+        }
         window.display();
         sleep(milliseconds(GAME_SPEED));
         Block1.fall();

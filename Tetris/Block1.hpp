@@ -1,7 +1,7 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
 #include <memory>
+#include <SFML/Graphics.hpp>
 
 #include "GlobalValues.hpp"
 #include "IBlock.hpp"
@@ -29,15 +29,14 @@ public:
 	const bool isMoveLeftPossible() const noexcept override;
 	void moveDown() noexcept override;
 
-	RectangleShape& getBlock1Ref() noexcept;
-	RectangleShape& getBlock2Ref() noexcept;
-	RectangleShape& getBlock3Ref() noexcept;
-	RectangleShape& getBlock4Ref() noexcept;
+	const array<RectangleShape, 4>& getBlock1ArrayRef() const noexcept;
+
 private:
-	RectangleShape block1_{}; // *--*
-	RectangleShape block2_{}; // |12|
-	RectangleShape block3_{}; // |34|
-	RectangleShape block4_{}; // *--*
+	array<RectangleShape, 4> block1Array_;
+	// *--*
+	// |01|
+	// |23|
+	// *--*
 	shared_ptr<BlockBoard> ptrToBlockBoard_{};
 
 	const uint8_t gridToX(uint8_t blockNumber) const noexcept;
