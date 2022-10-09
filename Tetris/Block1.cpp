@@ -24,7 +24,7 @@ Block1::Block1(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept
 
 const bool Block1::checkIfLost() const noexcept
 {
-	if (block1Array_.at(0).getPosition().y == GRID // TODO: Make this condition shorter
+	if (block1Array_.at(0).getPosition().y == GRID
 	  and ( ptrToBlockBoard_->getBoardArrayRef().at(gridToX(2)).at(gridToY(2)).getFillColor() == Color::Red
 	  or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3)).at(gridToY(3)).getFillColor() == Color::Red))
 	{
@@ -68,7 +68,6 @@ const bool Block1::isFallingPossible() noexcept
 	return true;
 }
 
-
 void Block1::moveRight() noexcept
 {
 	if (isMoveRightPossible())
@@ -83,8 +82,8 @@ void Block1::moveRight() noexcept
 const bool Block1::isMoveRightPossible() const noexcept
 {
 	if (block1Array_.at(1).getPosition().x >= GRID * NUMBER_OF_COLUMNS
-		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(1)).at(gridToY(1)).getFillColor() != Color::White
-		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3)).at(gridToY(3)).getFillColor() != Color::White)
+		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(1) + 1).at(gridToY(1)).getFillColor() != Color::White
+		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3) + 1).at(gridToY(3)).getFillColor() != Color::White)
 	{
 		return false;
 	}
@@ -105,8 +104,8 @@ void Block1::moveLeft() noexcept
 const bool Block1::isMoveLeftPossible() const noexcept
 {
 	if (block1Array_.at(0).getPosition().x <= GRID
-		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(0)).at(gridToY(0)).getFillColor() != Color::White
-		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(2)).at(gridToY(2)).getFillColor() != Color::White)
+		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(0) - 1).at(gridToY(0)).getFillColor() != Color::White
+		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(2) - 1).at(gridToY(2)).getFillColor() != Color::White)
 	{
 		return false;
 	}
@@ -129,7 +128,7 @@ const array<RectangleShape, 4>& Block1::getBlock1ArrayRef() const noexcept
 	return block1Array_;
 }
 
-const uint8_t Block1::gridToX(uint8_t blockNumber) const noexcept
+const uint8_t Block1::gridToX(const uint8_t& blockNumber) const noexcept
 {
 	switch (blockNumber)
 	{
@@ -146,7 +145,7 @@ const uint8_t Block1::gridToX(uint8_t blockNumber) const noexcept
 	}
 }
 
-const uint8_t Block1::gridToY(uint8_t blockNumber) const noexcept
+const uint8_t Block1::gridToY(const uint8_t& blockNumber) const noexcept
 {
 	switch (blockNumber)
 	{

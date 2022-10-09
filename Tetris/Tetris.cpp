@@ -1,6 +1,7 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <vector>
 
 #include "Band.hpp"
 #include "BlockBoard.hpp"
@@ -22,6 +23,7 @@ int main()
     Block1 Block1{blockBoardPtr};
     const EndgameText endgameText;
     GameStatus gameStatus{GameStatus::Ongoing};
+    vector<uint8_t> vectorOfRows;
 
     while (true)
     {
@@ -65,6 +67,14 @@ int main()
             sleep(milliseconds(2000));
             window.close();
             return 0;
+        }
+
+        vectorOfRows = blockBoardPtr->checkIfRowsFilled();
+        if (!vectorOfRows.empty())
+        {
+            blockBoardPtr->deleteRowOfBlocks(vectorOfRows);
+            window.draw(endgameText);
+            vectorOfRows.clear(); // TODO: Maybe redundant
         }
         window.draw(band);
         for (const auto& innerArray : blockBoardPtr->getBoardArrayRef())

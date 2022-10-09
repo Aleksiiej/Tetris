@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <array>
+#include <vector>
 #include <SFML/Graphics.hpp>
 
 #include "GlobalValues.hpp"
@@ -17,6 +18,9 @@ public:
 	BlockBoard(const BlockBoard& other) = delete;
 	BlockBoard(const BlockBoard&& other) = delete;
 	~BlockBoard() = default;
+
+	const vector<uint8_t> checkIfRowsFilled() const noexcept;
+	void deleteRowOfBlocks(const vector<uint8_t>& vectorOfRows) noexcept;
 
 	BoardArray& getBoardArrayRef() noexcept;
 	void setFillColor(const uint8_t& x, const uint8_t& y, const Color& color) noexcept;

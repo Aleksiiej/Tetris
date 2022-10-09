@@ -35,8 +35,8 @@ private:
 	array<RectangleShape, 4> block1Array_;
 	shared_ptr<BlockBoard> ptrToBlockBoard_{};
 
-	const uint8_t gridToX(uint8_t blockNumber) const noexcept;
-	const uint8_t gridToY(uint8_t blockNumber) const noexcept;
+	const uint8_t gridToX(const uint8_t& blockNumber) const noexcept;
+	const uint8_t gridToY(const uint8_t& blockNumber) const noexcept;
 	void setBLockAtStartingPosition() noexcept override;
 };
 
