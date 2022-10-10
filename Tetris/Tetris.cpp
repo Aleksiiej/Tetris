@@ -23,7 +23,6 @@ int main()
     Block1 Block1{blockBoardPtr};
     const EndgameText endgameText;
     GameStatus gameStatus{GameStatus::Ongoing};
-    vector<uint8_t> vectorOfRows;
 
     while (true)
     {
@@ -69,12 +68,7 @@ int main()
             return 0;
         }
 
-        vectorOfRows = blockBoardPtr->checkIfRowsFilled();
-        if (!vectorOfRows.empty())
-        {
-            blockBoardPtr->deleteRowOfBlocks(vectorOfRows);
-            window.draw(endgameText);
-        }
+        blockBoardPtr->handleFilledRows();
         window.draw(band);
         for (const auto& innerArray : blockBoardPtr->getBoardArrayRef())
         {

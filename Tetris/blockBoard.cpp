@@ -15,7 +15,16 @@ BlockBoard::BlockBoard() noexcept
     }
 }
 
-const vector<uint8_t> BlockBoard::checkIfRowsFilled() const noexcept
+void BlockBoard::handleFilledRows() noexcept
+{
+    const vector<uint8_t> vectorOfRows{ checkWhichRowsFilled() };
+    if (!vectorOfRows.empty())
+    {
+        deleteFilledRows(vectorOfRows);
+    }
+}
+
+const vector<uint8_t> BlockBoard::checkWhichRowsFilled() const noexcept
 {
     vector<uint8_t> filledRowsVec;
     uint8_t rowNumber{ 0 };
@@ -39,7 +48,7 @@ const vector<uint8_t> BlockBoard::checkIfRowsFilled() const noexcept
     return filledRowsVec;
 }
 
-void BlockBoard::deleteRowOfBlocks(const vector<uint8_t>& vectorOfRows) noexcept
+void BlockBoard::deleteFilledRows(const vector<uint8_t>& vectorOfRows) noexcept
 {
     for (const auto& el : vectorOfRows)
     {

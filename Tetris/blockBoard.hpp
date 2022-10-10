@@ -19,8 +19,9 @@ public:
 	BlockBoard(const BlockBoard&& other) = delete;
 	~BlockBoard() = default;
 
-	const vector<uint8_t> checkIfRowsFilled() const noexcept;
-	void deleteRowOfBlocks(const vector<uint8_t>& vectorOfRows) noexcept;
+	void handleFilledRows() noexcept;
+	const vector<uint8_t> checkWhichRowsFilled() const noexcept;
+	void deleteFilledRows(const vector<uint8_t>& vectorOfRows) noexcept;
 
 	BoardArray& getBoardArrayRef() noexcept;
 	void setFillColor(const uint8_t& x, const uint8_t& y, const Color& color) noexcept;
