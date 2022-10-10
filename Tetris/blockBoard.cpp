@@ -17,10 +17,10 @@ BlockBoard::BlockBoard() noexcept
 
 void BlockBoard::handleFilledRows() noexcept
 {
-    const vector<uint8_t> vectorOfRows{ checkWhichRowsFilled() };
-    if (!vectorOfRows.empty())
+    const vector<uint8_t> vectorOfFilledRows{ checkWhichRowsFilled() };
+    if (!vectorOfFilledRows.empty())
     {
-        deleteFilledRows(vectorOfRows);
+        deleteFilledRows(vectorOfFilledRows);
     }
 }
 
@@ -29,9 +29,9 @@ const vector<uint8_t> BlockBoard::checkWhichRowsFilled() const noexcept
     vector<uint8_t> filledRowsVec;
     uint8_t rowNumber{ 0 };
     uint8_t controlNumber{ 0 };
-    for (int i = 0; i < NUMBER_OF_ROWS; i++)
+    for (uint8_t i = 0; i < NUMBER_OF_ROWS; i++)
     {
-        for (int j = 0; j < NUMBER_OF_COLUMNS; j++)
+        for (uint8_t j = 0; j < NUMBER_OF_COLUMNS; j++)
         {
             if (blockBoard_.at(j).at(i).getFillColor() == Color::Red)
             {
@@ -55,7 +55,7 @@ void BlockBoard::deleteFilledRows(const vector<uint8_t>& vectorOfRows) noexcept
         for (auto& column : blockBoard_)
         {
             column.at(el).setFillColor(Color::White);
-            for (int i = el; i > 0; i--)
+            for (uint8_t i = el; i > 0; i--)
             {
                 column.at(i).setFillColor(column.at(i - 1).getFillColor());
             }

@@ -40,7 +40,7 @@ const bool Block1::isFallingPossible() noexcept
 {
 	if (block1Array_.at(2).getPosition().y >= GRID * NUMBER_OF_ROWS and block1Array_.at(3).getPosition().y >= GRID * NUMBER_OF_ROWS)
 	{
-		for (int i = 0; i < 4; i++)
+		for (uint8_t i = 0; i < 4; i++)
 		{
 		    ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), Color::Red);
 		}
@@ -50,7 +50,7 @@ const bool Block1::isFallingPossible() noexcept
 	else if (ptrToBlockBoard_->getBoardArrayRef().at(gridToX(2)).at(gridToY(2) + 1).getFillColor() != Color::White
 		     or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3)).at(gridToY(3) + 1).getFillColor() != Color::White)
 	{
-		for (int i = 0; i < 4; i++)
+		for (uint8_t i = 0; i < 4; i++)
 		{
 			ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), Color::Red);
 		}
