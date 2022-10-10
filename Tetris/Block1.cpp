@@ -9,12 +9,14 @@ block1Array_.at(3).setPosition((NUMBER_OF_COLUMNS / 2)* GRID + GRID, 2 * GRID); 
 }
 
 Block1::Block1(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept 
-	: block1Array_{ {RectangleShape(), RectangleShape(), RectangleShape(), RectangleShape() } }, 
+	: block1Array_{ {RectangleShape{Vector2f{ GRID, GRID }},
+	                 RectangleShape{Vector2f{ GRID, GRID }}, 
+	                 RectangleShape{Vector2f{ GRID, GRID }}, 
+	                 RectangleShape{Vector2f{ GRID, GRID }}} },
 	  ptrToBlockBoard_(ptrToBlockBoard)
 {
 	SET_BLOCK1_STARTING_POSITION;
-	for_each(begin(block1Array_), end(block1Array_), [](auto& block) { block.setSize(Vector2f{ GRID, GRID });
-	                                                                   block.setFillColor(Color::Red); });
+	for_each(begin(block1Array_), end(block1Array_), [](auto& block) { block.setFillColor(Color::Red); });
 }
 
 const bool Block1::checkIfLost() const noexcept
