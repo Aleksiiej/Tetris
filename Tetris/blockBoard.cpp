@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <vector>
 
 #include "BlockBoard.hpp"
@@ -19,9 +18,9 @@ BlockBoard::BlockBoard() noexcept
 const vector<uint8_t> BlockBoard::checkIfRowsFilled() const noexcept
 {
     vector<uint8_t> filledRowsVec;
-    uint8_t rowNumber{ NUMBER_OF_ROWS - 1 };
-    uint8_t controlNumber = 0;
-    for (int i = NUMBER_OF_ROWS - 1; i >= 0; i--)
+    uint8_t rowNumber{ 0 };
+    uint8_t controlNumber{ 0 };
+    for (int i = 0; i < NUMBER_OF_ROWS; i++)
     {
         for (int j = 0; j < NUMBER_OF_COLUMNS; j++)
         {
@@ -29,15 +28,14 @@ const vector<uint8_t> BlockBoard::checkIfRowsFilled() const noexcept
             {
                 controlNumber++;
             }
-            if (controlNumber == 10)
-            {
-                filledRowsVec.push_back(rowNumber);
-            }
         }
-        rowNumber--;
+        if (controlNumber == 10)
+        {
+            filledRowsVec.push_back(rowNumber);
+        }
+        rowNumber++;
         controlNumber = 0;
     }
-    reverse(begin(filledRowsVec), end(filledRowsVec));
     return filledRowsVec;
 }
 
