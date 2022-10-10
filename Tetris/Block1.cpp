@@ -1,14 +1,18 @@
 #include "BlockBoard.hpp"
 #include "Block1.hpp"
 
-#define BLOCK1_STARTING_POSITION block1Array_.at(0).setPosition((NUMBER_OF_COLUMNS / 2) * GRID, GRID);##block1Array_.at(1).setPosition((NUMBER_OF_COLUMNS / 2)* GRID + GRID, GRID);##block1Array_.at(2).setPosition((NUMBER_OF_COLUMNS / 2)* GRID, 2 * GRID);##block1Array_.at(3).setPosition((NUMBER_OF_COLUMNS / 2)* GRID + GRID, 2 * GRID);
+#define SET_BLOCK1_STARTING_POSITION {\
+block1Array_.at(0).setPosition((NUMBER_OF_COLUMNS / 2) * GRID, GRID); \
+block1Array_.at(1).setPosition((NUMBER_OF_COLUMNS / 2)* GRID + GRID, GRID); \
+block1Array_.at(2).setPosition((NUMBER_OF_COLUMNS / 2)* GRID, 2 * GRID); \
+block1Array_.at(3).setPosition((NUMBER_OF_COLUMNS / 2)* GRID + GRID, 2 * GRID); \
+}
 
 Block1::Block1(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept 
 	: block1Array_{ {RectangleShape(), RectangleShape(), RectangleShape(), RectangleShape() } }, 
 	  ptrToBlockBoard_(ptrToBlockBoard)
 {
-	BLOCK1_STARTING_POSITION;
-
+	SET_BLOCK1_STARTING_POSITION;
 	for_each(begin(block1Array_), end(block1Array_), [](auto& block) { block.setSize(Vector2f{ GRID, GRID });
 	                                                                   block.setFillColor(Color::Red); });
 }
@@ -40,7 +44,7 @@ const bool Block1::isFallingPossible() noexcept
 		{
 		    ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), Color::Red);
 		}
-		setBLockAtStartingPosition();
+		SET_BLOCK1_STARTING_POSITION;
 		return false;
 	}
 	else if (ptrToBlockBoard_->getBoardArrayRef().at(gridToX(2)).at(gridToY(2) + 1).getFillColor() != Color::White
@@ -50,7 +54,7 @@ const bool Block1::isFallingPossible() noexcept
 		{
 			ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), Color::Red);
 		}
-		setBLockAtStartingPosition();
+		SET_BLOCK1_STARTING_POSITION;
 		return false;
 	}
 	return true;
@@ -139,9 +143,4 @@ const uint8_t Block1::gridToY(const uint8_t& blockNumber) const noexcept
 	default:
 		return 255;
 	}
-}
-
-void Block1::setBLockAtStartingPosition() noexcept
-{
-	BLOCK1_STARTING_POSITION;
 }

@@ -16,6 +16,5 @@ public:
 private:
 	virtual const uint8_t gridToX(const uint8_t& blockNumber) const noexcept = 0;
 	virtual const uint8_t gridToY(const uint8_t& blockNumber) const noexcept = 0;
-	virtual void setBLockAtStartingPosition() noexcept = 0;
 };
 

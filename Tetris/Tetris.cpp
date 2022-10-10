@@ -74,7 +74,6 @@ int main()
         {
             blockBoardPtr->deleteRowOfBlocks(vectorOfRows);
             window.draw(endgameText);
-            vectorOfRows.clear(); // TODO: Maybe redundant
         }
         window.draw(band);
         for (const auto& innerArray : blockBoardPtr->getBoardArrayRef())
