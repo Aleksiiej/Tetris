@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <vector>
 
 #include "BlockBoard.hpp"
@@ -36,6 +37,7 @@ const vector<uint8_t> BlockBoard::checkIfRowsFilled() const noexcept
         rowNumber--;
         controlNumber = 0;
     }
+    reverse(begin(filledRowsVec), end(filledRowsVec));
     return filledRowsVec;
 }
 
@@ -51,9 +53,7 @@ void BlockBoard::deleteRowOfBlocks(const vector<uint8_t>& vectorOfRows) noexcept
                 column.at(i).setFillColor(column.at(i - 1).getFillColor());
             }
         }
-
     }
-
 }
 
 BoardArray& BlockBoard::getBoardArrayRef() noexcept
