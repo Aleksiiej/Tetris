@@ -29,7 +29,7 @@ public:
 	const bool isMoveLeftPossible() const noexcept override;
 	void moveDown() noexcept override;
 
-	const array<RectangleShape, 4>& getBlock1ArrayRef() const noexcept;
+	const array<RectangleShape, 4>& getBlock1ArrayRef() const noexcept override;
 
 private:
 	array<RectangleShape, 4> block1Array_;

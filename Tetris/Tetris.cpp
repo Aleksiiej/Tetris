@@ -12,6 +12,8 @@
 using namespace sf;
 using namespace std;
 
+void drawBoard(const Band& band, const shared_ptr<BlockBoard>& blockBoardPtr, RenderWindow& window) noexcept;
+
 int main()
 {
     RenderWindow window{ VideoMode{800, 600}, "Tetris" };
@@ -20,14 +22,14 @@ int main()
 
     const Band band{ GRID, GRID };
     const auto blockBoardPtr = make_shared<BlockBoard>();
-    Block1 Block1{blockBoardPtr};
+    Block1 block1{blockBoardPtr};
     const EndgameText endgameText;
     GameStatus gameStatus{GameStatus::Ongoing};
 
     while (true)
     {
         window.clear(Color::White);
-        if (!Block1.checkIfLost())
+        if (!block1.checkIfLost())
         {
             gameStatus = GameStatus::Lost;
         }
@@ -42,25 +44,21 @@ int main()
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Right)
                 {
-                    Block1.moveRight();
+                    block1.moveRight();
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Left)
                 {
-                    Block1.moveLeft();
+                    block1.moveLeft();
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Down)
                 {
-                    Block1.moveDown();
+                    block1.moveDown();
                 }
             }
         }
         else
         {
-            window.draw(band);
-            for (const auto& innerArray : blockBoardPtr->getBoardArrayRef())
-            {
-                for_each(begin(innerArray), end(innerArray), [&window](const auto& block) { window.draw(block); });
-            }
+            drawBoard(band, blockBoardPtr, window);
             window.draw(endgameText);
             window.display();
             sleep(milliseconds(2000));
@@ -69,18 +67,23 @@ int main()
         }
 
         blockBoardPtr->handleFilledRows();
-        window.draw(band);
-        for (const auto& innerArray : blockBoardPtr->getBoardArrayRef())
-        {
-            for_each(begin(innerArray), end(innerArray), [&window](const auto& block) { window.draw(block); });
-        }
-        for (const auto& block : Block1.getBlock1ArrayRef())
+        drawBoard(band, blockBoardPtr, window);
+        for (const auto& block : block1.getBlock1ArrayRef())
         {
             window.draw(block);
         }
         window.display();
         sleep(milliseconds(GAME_SPEED));
-        Block1.fall();
+        block1.fall();
     }
     return 0;
+}
+
+void drawBoard(const Band& band, const shared_ptr<BlockBoard>& blockBoardPtr, RenderWindow& window) noexcept
+{
+        window.draw(band);
+        for (const auto& innerArray : blockBoardPtr->getBoardArrayRef())
+        {
+            for_each(begin(innerArray), end(innerArray), [&window](const auto& block) { window.draw(block); });
+        }
 }
