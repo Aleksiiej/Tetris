@@ -6,6 +6,7 @@
 #include "Band.hpp"
 #include "BlockBoard.hpp"
 #include "Block1.hpp"
+#include "Block2.hpp"
 #include "EndgameText.hpp"
 #include "GlobalValues.hpp"
 
@@ -22,14 +23,14 @@ int main()
 
     const Band band{ GRID, GRID };
     const auto blockBoardPtr = make_shared<BlockBoard>();
-    Block1 block1{blockBoardPtr};
+    Block2 block2{blockBoardPtr};
     const EndgameText endgameText;
     GameStatus gameStatus{GameStatus::Ongoing};
 
     while (true)
     {
         window.clear(Color::White);
-        if (!block1.checkIfLost())
+        if (!block2.checkIfLost())
         {
             gameStatus = GameStatus::Lost;
         }
@@ -44,15 +45,15 @@ int main()
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Right)
                 {
-                    block1.moveRight();
+                    block2.moveRight();
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Left)
                 {
-                    block1.moveLeft();
+                    block2.moveLeft();
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Down)
                 {
-                    block1.moveDown();
+                    block2.moveDown();
                 }
             }
         }
@@ -68,13 +69,13 @@ int main()
 
         blockBoardPtr->handleFilledRows();
         drawBoard(band, blockBoardPtr, window);
-        for (const auto& block : block1.getBlock1ArrayRef())
+        for (const auto& block : block2.getBlock1ArrayRef())
         {
             window.draw(block);
         }
         window.display();
         sleep(milliseconds(GAME_SPEED));
-        block1.fall();
+        block2.fall();
     }
     return 0;
 }

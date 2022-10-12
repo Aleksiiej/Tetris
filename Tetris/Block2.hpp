@@ -39,7 +39,6 @@ private:
 	const uint8_t gridToY(const uint8_t& blockNumber) const noexcept;
 };
 
-// *--*
-// |01|
-// |23|
-// *--*
+// *----*
+// |0123|
+// *----*
