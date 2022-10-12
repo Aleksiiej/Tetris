@@ -66,10 +66,10 @@ const array<RectangleShape, 4>& Block2::getBlock1ArrayRef() const noexcept
 
 const uint8_t Block2::gridToX(const uint8_t& blockNumber) const noexcept
 {
-
+	return 1;
 }
 
 const uint8_t Block2::gridToY(const uint8_t& blockNumber) const noexcept
 {
-
+	return 1;
 }
