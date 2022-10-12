@@ -13,6 +13,8 @@ public:
 	virtual void moveLeft() noexcept = 0;
 	virtual const bool isMoveLeftPossible() const noexcept = 0;
 	virtual void moveDown() noexcept = 0;
+	virtual const bool isRotationPossible() const noexcept = 0;
+	virtual void rotate() noexcept = 0;
 	virtual const array<RectangleShape, 4>& getBlock1ArrayRef() const noexcept = 0;
 
 private:

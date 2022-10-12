@@ -113,6 +113,16 @@ const array<RectangleShape, 4>& Block1::getBlock1ArrayRef() const noexcept
 	return block1Array_;
 }
 
+const bool Block1::isRotationPossible() const noexcept
+{
+	return false;
+}
+
+void Block1::rotate() noexcept
+{
+
+}
+
 const uint8_t Block1::gridToX(const uint8_t& blockNumber) const noexcept
 {
 	switch (blockNumber)

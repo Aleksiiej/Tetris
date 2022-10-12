@@ -28,6 +28,8 @@ public:
 	void moveLeft() noexcept override;
 	const bool isMoveLeftPossible() const noexcept override;
 	void moveDown() noexcept override;
+	const bool isRotationPossible() const noexcept override;
+	void rotate() noexcept override;
 
 	const array<RectangleShape, 4>& getBlock1ArrayRef() const noexcept override;
 

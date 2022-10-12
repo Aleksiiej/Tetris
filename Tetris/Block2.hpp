@@ -11,6 +11,11 @@ using namespace std;
 
 class BlockBoard;
 
+enum class Block2Position
+{
+	Horizontal, Vertical
+};
+
 class Block2 : public IBlock
 {
 public:
@@ -28,11 +33,14 @@ public:
 	void moveLeft() noexcept override;
 	const bool isMoveLeftPossible() const noexcept override;
 	void moveDown() noexcept override;
+	const bool isRotationPossible() const noexcept override;
+	void rotate() noexcept override;
 
 	const array<RectangleShape, 4>& getBlock1ArrayRef() const noexcept override;
 
 private:
 	array<RectangleShape, 4> block2Array_;
+	Block2Position currentPosition_{};
 	shared_ptr<BlockBoard> ptrToBlockBoard_{};
 
 	const uint8_t gridToX(const uint8_t& blockNumber) const noexcept;
