@@ -55,6 +55,10 @@ int main()
                 {
                     block2.moveDown();
                 }
+                if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Space)
+                {
+                    block2.rotate();
+                }
             }
         }
         else

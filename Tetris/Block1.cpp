@@ -120,7 +120,7 @@ const bool Block1::isRotationPossible() const noexcept
 
 void Block1::rotate() noexcept
 {
-
+	return;
 }
 
 const uint8_t Block1::gridToX(const uint8_t& blockNumber) const noexcept

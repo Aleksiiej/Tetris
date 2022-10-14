@@ -23,13 +23,10 @@ Block2::Block2(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept
 const bool Block2::checkIfLost() const noexcept
 {
 	if (block2Array_.at(0).getPosition().y == GRID
-		and ptrToBlockBoard_->getBoardArrayRef().at(gridToX(0)).at(gridToY(0)).getFillColor() == Color::Red
-		or block2Array_.at(1).getPosition().y == GRID
-		and ptrToBlockBoard_->getBoardArrayRef().at(gridToX(1)).at(gridToY(1)).getFillColor() == Color::Red
-		or block2Array_.at(2).getPosition().y == GRID
-		and ptrToBlockBoard_->getBoardArrayRef().at(gridToX(2)).at(gridToY(3)).getFillColor() == Color::Red
-	    or block2Array_.at(3).getPosition().y == GRID
-	    and ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3)).at(gridToY(3)).getFillColor() == Color::Red)	
+		and ( ptrToBlockBoard_->getBoardArrayRef().at(gridToX(0)).at(gridToY(0)).getFillColor() == Color::Red
+		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(1)).at(gridToY(1)).getFillColor() == Color::Red
+		or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(2)).at(gridToY(3)).getFillColor() == Color::Red
+	    or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3)).at(gridToY(3)).getFillColor() == Color::Red ))	
 	{
 		return false;
 	}
@@ -72,26 +69,98 @@ const bool Block2::isFallingPossible() noexcept
 		}
 		return true;
 	}
+	else if (currentPosition_ == Block2Position::Vertical)
+	{
+		if (block2Array_.at(3).getPosition().y >= GRID * NUMBER_OF_ROWS)
+		{
+			for (uint8_t i = 0; i < 4; i++)
+			{
+				ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), Color::Red);
+			}
+			SET_BLOCK2_STARTING_POSITION;
+			currentPosition_ = Block2Position::Horizontal;
+			return false;
+		}
+		else if (ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3)).at(gridToY(3) + 1).getFillColor() != Color::White)
+		{
+			for (uint8_t i = 0; i < 4; i++)
+			{
+				ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), Color::Red);
+			}
+			SET_BLOCK2_STARTING_POSITION;
+			currentPosition_ = Block2Position::Horizontal;
+			return false;
+		}
+		return true;
+	}
+	return false; // TODO: Reconsider this return
 }
 
-const bool Block2::isMoveLeftPossible() const noexcept
-{
-	return true;
-}
 
 void Block2::moveRight() noexcept
 {
-
+	if (isMoveRightPossible())
+	{
+		for_each(begin(block2Array_), end(block2Array_), [](auto& block) { block.move(GRID, 0); });
+	}
 }
 
 const bool Block2::isMoveRightPossible() const noexcept
 {
-	return true;
+	if (currentPosition_ == Block2Position::Horizontal)
+	{
+		if (block2Array_.at(3).getPosition().x >= GRID * NUMBER_OF_COLUMNS
+			or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3) + 1).at(gridToY(3)).getFillColor() != Color::White)
+		{
+			return false;
+		}
+		return true;
+	}
+	else if (currentPosition_ == Block2Position::Vertical)
+	{
+		if (block2Array_.at(3).getPosition().x >= GRID * NUMBER_OF_COLUMNS
+			or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(0) + 1).at(gridToY(3)).getFillColor() != Color::White
+			or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(1) + 1).at(gridToY(3)).getFillColor() != Color::White
+			or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(2) + 1).at(gridToY(3)).getFillColor() != Color::White
+			or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3) + 1).at(gridToY(3)).getFillColor() != Color::White)
+		{
+			return false;
+		}
+		return true;
+	}
 }
 
 void Block2::moveLeft() noexcept
 {
+	if (isMoveLeftPossible())
+	{
+		for_each(begin(block2Array_), end(block2Array_), [](auto& block) { block.move(-GRID, 0); });
+	}
+}
 
+const bool Block2::isMoveLeftPossible() const noexcept
+{
+	if (currentPosition_ == Block2Position::Horizontal)
+	{
+		if (block2Array_.at(0).getPosition().x <= GRID
+			or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(0) - 1).at(gridToY(3)).getFillColor() != Color::White)
+		{
+			return false;
+		}
+		return true;
+	}
+	else if (currentPosition_ == Block2Position::Vertical)
+	{
+		if (block2Array_.at(3).getPosition().x <= GRID
+			or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(0) - 1).at(gridToY(3)).getFillColor() != Color::White
+			or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(1) - 1).at(gridToY(3)).getFillColor() != Color::White
+			or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(2) - 1).at(gridToY(3)).getFillColor() != Color::White
+			or ptrToBlockBoard_->getBoardArrayRef().at(gridToX(3) - 1).at(gridToY(3)).getFillColor() != Color::White)
+		{
+			return false;
+		}
+		return true;
+	}
 }
 
 void Block2::moveDown() noexcept
@@ -102,14 +171,44 @@ void Block2::moveDown() noexcept
 	}
 }
 
-const bool Block2::isRotationPossible() const noexcept
+const bool Block2::isRotationPossible() const noexcept //TODO: Need completion
 {
-	return false;
+	if (currentPosition_ == Block2Position::Horizontal)
+	{
+		if (block2Array_.at(1).getPosition().x > GRID
+			and block2Array_.at(1).getPosition().x < GRID * NUMBER_OF_COLUMNS - GRID
+			and block2Array_.at(1).getPosition().y <= GRID
+			and block2Array_.at(1).getPosition().y > GRID * NUMBER_OF_ROWS - 2 * GRID)
+		{
+			return true;
+		}
+		else return false;
+	}
+	else if (currentPosition_ == Block2Position::Vertical)
+	{
+		return true;
+	}
 }
 
 void Block2::rotate() noexcept
 {
-	
+	if (isRotationPossible())
+	{
+		if (currentPosition_ == Block2Position::Horizontal)
+		{
+			block2Array_.at(0).setPosition(block2Array_.at(0).getPosition().x + GRID, block2Array_.at(0).getPosition().y - GRID);
+			block2Array_.at(2).setPosition(block2Array_.at(2).getPosition().x - GRID, block2Array_.at(2).getPosition().y + GRID);
+			block2Array_.at(3).setPosition(block2Array_.at(3).getPosition().x - 2 * GRID, block2Array_.at(3).getPosition().y + 2 * GRID);
+			currentPosition_ = Block2Position::Vertical;
+		}
+		else if (currentPosition_ == Block2Position::Vertical)
+		{ 
+			block2Array_.at(0).setPosition(block2Array_.at(0).getPosition().x - GRID, block2Array_.at(0).getPosition().y + GRID);
+			block2Array_.at(2).setPosition(block2Array_.at(2).getPosition().x + GRID, block2Array_.at(2).getPosition().y - GRID);
+			block2Array_.at(3).setPosition(block2Array_.at(3).getPosition().x + 2 * GRID, block2Array_.at(3).getPosition().y - 2 * GRID);
+			currentPosition_ = Block2Position::Horizontal;
+		}
+	}
 }
 
 const array<RectangleShape, 4>& Block2::getBlock1ArrayRef() const noexcept
