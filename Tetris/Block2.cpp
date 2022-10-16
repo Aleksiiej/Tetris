@@ -175,10 +175,11 @@ const bool Block2::isRotationPossible() const noexcept //TODO: Need completion
 {
 	if (currentPosition_ == Block2Position::Horizontal)
 	{
-		if (block2Array_.at(1).getPosition().x > GRID
-			and block2Array_.at(1).getPosition().x < GRID * NUMBER_OF_COLUMNS - GRID
-			and block2Array_.at(1).getPosition().y <= GRID
-			and block2Array_.at(1).getPosition().y > GRID * NUMBER_OF_ROWS - 2 * GRID)
+		if (block2Array_.at(1).getPosition().y > GRID
+			and block2Array_.at(1).getPosition().y < GRID * NUMBER_OF_ROWS - GRID
+			and ptrToBlockBoard_->getBoardArrayRef().at(gridToX(1)).at(gridToY(1) - 1).getFillColor() == Color::White
+			and ptrToBlockBoard_->getBoardArrayRef().at(gridToX(1)).at(gridToY(1) + 1).getFillColor() == Color::White
+			and ptrToBlockBoard_->getBoardArrayRef().at(gridToX(1)).at(gridToY(1) + 2).getFillColor() == Color::White)
 		{
 			return true;
 		}
@@ -186,7 +187,17 @@ const bool Block2::isRotationPossible() const noexcept //TODO: Need completion
 	}
 	else if (currentPosition_ == Block2Position::Vertical)
 	{
-		return true;
+		if (block2Array_.at(1).getPosition().x > GRID
+			and block2Array_.at(1).getPosition().x < GRID * NUMBER_OF_COLUMNS - GRID
+			and block2Array_.at(1).getPosition().y > GRID
+			and block2Array_.at(1).getPosition().y < GRID * NUMBER_OF_ROWS - GRID
+			and ptrToBlockBoard_->getBoardArrayRef().at(gridToX(1) - 1).at(gridToY(1)).getFillColor() == Color::White
+			and ptrToBlockBoard_->getBoardArrayRef().at(gridToX(1) + 1).at(gridToY(1)).getFillColor() == Color::White
+			and ptrToBlockBoard_->getBoardArrayRef().at(gridToX(1) + 2).at(gridToY(1)).getFillColor() == Color::White)
+		{
+			return true;
+		}
+		else return false;
 	}
 }
 
