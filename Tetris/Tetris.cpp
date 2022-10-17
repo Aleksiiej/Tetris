@@ -5,6 +5,7 @@
 
 #include "Band.hpp"
 #include "BlockBoard.hpp"
+#include "BlockCreator.hpp"
 #include "Block1.hpp"
 #include "Block2.hpp"
 #include "EndgameText.hpp"
@@ -26,6 +27,8 @@ int main()
     Block2 block2{blockBoardPtr};
     const EndgameText endgameText;
     GameStatus gameStatus{GameStatus::Ongoing};
+    BlockCreator blockCreator(blockBoardPtr);
+
 
     while (true)
     {
