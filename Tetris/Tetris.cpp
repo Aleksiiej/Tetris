@@ -24,16 +24,15 @@ int main()
 
     const Band band{ GRID, GRID };
     const auto blockBoardPtr = make_shared<BlockBoard>();
-    Block2 block2{blockBoardPtr};
     const EndgameText endgameText;
     GameStatus gameStatus{GameStatus::Ongoing};
     BlockCreator blockCreator(blockBoardPtr);
-
+    unique_ptr<IBlock> ptrToBlock = move(blockCreator.createRandomBlock());
 
     while (true)
     {
         window.clear(Color::White);
-        if (!block2.checkIfLost())
+        if (!ptrToBlock->checkIfLost())
         {
             gameStatus = GameStatus::Lost;
         }
@@ -48,19 +47,19 @@ int main()
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Right)
                 {
-                    block2.moveRight();
+                    ptrToBlock->moveRight();
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Left)
                 {
-                    block2.moveLeft();
+                    ptrToBlock->moveLeft();
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Down)
                 {
-                    block2.moveDown();
+                    ptrToBlock->moveDown();
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Space)
                 {
-                    block2.rotate();
+                    ptrToBlock->rotate();
                 }
             }
         }
@@ -76,13 +75,13 @@ int main()
 
         blockBoardPtr->handleFilledRows();
         drawBoard(band, blockBoardPtr, window);
-        for (const auto& block : block2.getBlock1ArrayRef())
+        for (const auto& block : ptrToBlock->getBlock1ArrayRef())
         {
             window.draw(block);
         }
         window.display();
         sleep(milliseconds(GAME_SPEED));
-        block2.fall();
+        ptrToBlock->fall();
     }
     return 0;
 }

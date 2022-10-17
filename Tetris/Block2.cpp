@@ -227,6 +227,14 @@ const array<RectangleShape, 4>& Block2::getBlock1ArrayRef() const noexcept
 	return block2Array_;
 }
 
+void Block2::setColor(const Color& color) noexcept
+{
+	for (auto& block : block2Array_)
+	{
+		block.setFillColor(color);
+	}
+}
+
 const uint8_t Block2::gridToX(const uint8_t& blockNumber) const noexcept
 {
 	switch (blockNumber)

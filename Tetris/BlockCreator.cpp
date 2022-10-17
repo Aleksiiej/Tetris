@@ -8,18 +8,47 @@ BlockCreator::BlockCreator(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexce
 	: ptrToBlockBoard_(ptrToBlockBoard)
 {}
 
-shared_ptr<IBlock> BlockCreator::createRandomBlock()
+unique_ptr<IBlock> BlockCreator::createRandomBlock()
 {
+	unique_ptr<IBlock> createdBlock;
+	uint8_t randomNumber;
+
 	mt19937 rng(rd());
-	uniform_int_distribution<> distrib(0, 1);
-	uint8_t randomNumber = distrib(rng);
+	uniform_int_distribution<> distrib1(0, 1);
+	randomNumber = distrib1(rng);
 	switch (randomNumber)
 	{
 	case 0:
-		return make_shared<Block1>(ptrToBlockBoard_);
+		createdBlock = make_unique<Block1>(ptrToBlockBoard_);
 		break;
 	case 1:
-		return make_shared<Block2>(ptrToBlockBoard_);
+		createdBlock = make_unique<Block2>(ptrToBlockBoard_);
 		break;
 	}
+
+	uniform_int_distribution<> distrib2(0, 5);
+	randomNumber = distrib2(rng);
+	switch (randomNumber)
+	{
+	case 0:
+		createdBlock->setColor(Color::Red);
+		break;
+	case 1:
+		createdBlock->setColor(Color::Green);
+		break;
+	case 2:
+		createdBlock->setColor(Color::Blue);
+		break;
+	case 3:
+		createdBlock->setColor(Color::Yellow);
+		break;
+	case 4:
+		createdBlock->setColor(Color::Magenta);
+		break;
+	case 5:
+		createdBlock->setColor(Color::Cyan);
+		break;
+	}
+
+	return createdBlock;
 }

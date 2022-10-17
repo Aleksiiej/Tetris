@@ -113,6 +113,14 @@ const array<RectangleShape, 4>& Block1::getBlock1ArrayRef() const noexcept
 	return block1Array_;
 }
 
+void Block1::setColor(const Color& color) noexcept
+{
+	for (auto& block : block1Array_)
+	{
+		block.setFillColor(color);
+	}
+}
+
 const bool Block1::isRotationPossible() const noexcept
 {
 	return false;

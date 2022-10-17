@@ -16,7 +16,7 @@ class BlockCreator
 public:
 	BlockCreator() = delete;
 	BlockCreator(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept;
-	shared_ptr<IBlock> createRandomBlock();
+	unique_ptr<IBlock> createRandomBlock();
 private:
 	const shared_ptr<BlockBoard> ptrToBlockBoard_{};
 	random_device rd;
