@@ -113,6 +113,11 @@ const array<RectangleShape, 4>& Block1::getBlock1ArrayRef() const noexcept
 	return block1Array_;
 }
 
+const Color& Block1::getColor() const noexcept
+{
+	return block1Array_.at(0).getFillColor();
+}
+
 void Block1::setColor(const Color& color) noexcept
 {
 	for (auto& block : block1Array_)
