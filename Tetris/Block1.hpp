@@ -33,7 +33,6 @@ public:
 	void rotate() noexcept override;
 
 	const array<RectangleShape, 4>& getBlock1ArrayRef() const noexcept override;
-	const Color& getColor() const noexcept;
 	void setColor(const Color& color) noexcept;
 
 private:

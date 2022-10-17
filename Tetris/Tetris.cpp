@@ -81,7 +81,16 @@ int main()
         }
         window.display();
         sleep(milliseconds(GAME_SPEED));
-        ptrToBlock->fall();
+        //ptrToBlock->fall();
+        if (ptrToBlock->isFallingPossible())
+        {
+            ptrToBlock->fall();
+        }
+        else
+        {
+            ptrToBlock.reset(nullptr);
+            ptrToBlock = move(blockCreator.createRandomBlock());
+        }
     }
     return 0;
 }

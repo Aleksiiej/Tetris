@@ -16,7 +16,6 @@ public:
 	virtual const bool isRotationPossible() const noexcept = 0;
 	virtual void rotate() noexcept = 0;
 	virtual const array<RectangleShape, 4>& getBlock1ArrayRef() const noexcept = 0;
-	virtual const Color& getColor() const noexcept = 0;
 	virtual void setColor(const Color& color) noexcept = 0;
 
 private:

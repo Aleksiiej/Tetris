@@ -1,13 +1,6 @@
 #include "BlockBoard.hpp"
 #include "Block1.hpp"
 
-#define SET_BLOCK1_STARTING_POSITION {\
-block1Array_.at(0).setPosition((NUMBER_OF_COLUMNS / 2) * GRID, GRID); \
-block1Array_.at(1).setPosition((NUMBER_OF_COLUMNS / 2)* GRID + GRID, GRID); \
-block1Array_.at(2).setPosition((NUMBER_OF_COLUMNS / 2)* GRID, 2 * GRID); \
-block1Array_.at(3).setPosition((NUMBER_OF_COLUMNS / 2)* GRID + GRID, 2 * GRID); \
-}
-
 Block1::Block1(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept 
 	: block1Array_{ {RectangleShape{Vector2f{ GRID, GRID }},
 	                 RectangleShape{Vector2f{ GRID, GRID }}, 
@@ -15,7 +8,10 @@ Block1::Block1(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept
 	                 RectangleShape{Vector2f{ GRID, GRID }}} },
 	  ptrToBlockBoard_(ptrToBlockBoard)
 {
-	SET_BLOCK1_STARTING_POSITION;
+	block1Array_.at(0).setPosition((NUMBER_OF_COLUMNS / 2)* GRID, GRID); 
+	block1Array_.at(1).setPosition((NUMBER_OF_COLUMNS / 2)* GRID + GRID, GRID); 
+	block1Array_.at(2).setPosition((NUMBER_OF_COLUMNS / 2)* GRID, 2 * GRID); 
+	block1Array_.at(3).setPosition((NUMBER_OF_COLUMNS / 2)* GRID + GRID, 2 * GRID);
 	for_each(begin(block1Array_), end(block1Array_), [](auto& block) { block.setFillColor(Color::Red); });
 }
 
@@ -32,10 +28,7 @@ const bool Block1::checkIfLost() const noexcept
 
 void Block1::fall() noexcept
 {
-	if (isFallingPossible())
-	{
 		for_each(begin(block1Array_), end(block1Array_), [](auto& block) { block.move(0, GRID); });
-	}
 }
 
 const bool Block1::isFallingPossible() noexcept
@@ -44,9 +37,8 @@ const bool Block1::isFallingPossible() noexcept
 	{
 		for (uint8_t i = 0; i < 4; i++)
 		{
-		    ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), Color::Red);
+		    ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), block1Array_.at(0).getFillColor());
 		}
-		SET_BLOCK1_STARTING_POSITION;
 		return false;
 	}
 	else if (ptrToBlockBoard_->getBoardArrayRef().at(gridToX(2)).at(gridToY(2) + 1).getFillColor() != Color::White
@@ -54,9 +46,8 @@ const bool Block1::isFallingPossible() noexcept
 	{
 		for (uint8_t i = 0; i < 4; i++)
 		{
-			ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), Color::Red);
+			ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), block1Array_.at(0).getFillColor());
 		}
-		SET_BLOCK1_STARTING_POSITION;
 		return false;
 	}
 	return true;
@@ -111,11 +102,6 @@ void Block1::moveDown() noexcept
 const array<RectangleShape, 4>& Block1::getBlock1ArrayRef() const noexcept
 {
 	return block1Array_;
-}
-
-const Color& Block1::getColor() const noexcept
-{
-	return block1Array_.at(0).getFillColor();
 }
 
 void Block1::setColor(const Color& color) noexcept

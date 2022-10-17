@@ -1,13 +1,6 @@
 #include "BlockBoard.hpp"
 #include "Block2.hpp"
 
-#define SET_BLOCK2_STARTING_POSITION {\
-block2Array_.at(0).setPosition((NUMBER_OF_COLUMNS / 2) * GRID - GRID, GRID); \
-block2Array_.at(1).setPosition((NUMBER_OF_COLUMNS / 2) * GRID, GRID); \
-block2Array_.at(2).setPosition((NUMBER_OF_COLUMNS / 2) * GRID + GRID, GRID); \
-block2Array_.at(3).setPosition((NUMBER_OF_COLUMNS / 2) * GRID + 2 * GRID, GRID); \
-}
-
 Block2::Block2(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept
 	: block2Array_{ {RectangleShape{Vector2f{ GRID, GRID }},
 					 RectangleShape{Vector2f{ GRID, GRID }},
@@ -16,7 +9,10 @@ Block2::Block2(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept
 	currentPosition_(Block2Position::Horizontal),
 	ptrToBlockBoard_(ptrToBlockBoard)
 {
-	SET_BLOCK2_STARTING_POSITION;
+	block2Array_.at(0).setPosition((NUMBER_OF_COLUMNS / 2)* GRID - GRID, GRID);
+	block2Array_.at(1).setPosition((NUMBER_OF_COLUMNS / 2)* GRID, GRID);
+	block2Array_.at(2).setPosition((NUMBER_OF_COLUMNS / 2)* GRID + GRID, GRID);
+	block2Array_.at(3).setPosition((NUMBER_OF_COLUMNS / 2)* GRID + 2 * GRID, GRID);
 	for_each(begin(block2Array_), end(block2Array_), [](auto& block) { block.setFillColor(Color::Red); });
 }
 
@@ -35,10 +31,7 @@ const bool Block2::checkIfLost() const noexcept
 
 void Block2::fall() noexcept
 {
-	if (isFallingPossible())
-	{
 		for_each(begin(block2Array_), end(block2Array_), [](auto& block) { block.move(0, GRID); });
-	}
 }
 
 const bool Block2::isFallingPossible() noexcept
@@ -50,9 +43,8 @@ const bool Block2::isFallingPossible() noexcept
 		{
 			for (uint8_t i = 0; i < 4; i++)
 			{
-				ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), Color::Red);
+				ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), block2Array_.at(0).getFillColor());
 			}
-			SET_BLOCK2_STARTING_POSITION;
 			return false;
 		}
 		else if (ptrToBlockBoard_->getBoardArrayRef().at(gridToX(0)).at(gridToY(0) + 1).getFillColor() != Color::White
@@ -62,9 +54,8 @@ const bool Block2::isFallingPossible() noexcept
 		{
 			for (uint8_t i = 0; i < 4; i++)
 			{
-				ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), Color::Red);
+				ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), block2Array_.at(0).getFillColor());
 			}
-			SET_BLOCK2_STARTING_POSITION;
 			return false;
 		}
 		return true;
@@ -75,9 +66,8 @@ const bool Block2::isFallingPossible() noexcept
 		{
 			for (uint8_t i = 0; i < 4; i++)
 			{
-				ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), Color::Red);
+				ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), block2Array_.at(0).getFillColor());
 			}
-			SET_BLOCK2_STARTING_POSITION;
 			currentPosition_ = Block2Position::Horizontal;
 			return false;
 		}
@@ -85,9 +75,8 @@ const bool Block2::isFallingPossible() noexcept
 		{
 			for (uint8_t i = 0; i < 4; i++)
 			{
-				ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), Color::Red);
+				ptrToBlockBoard_->setFillColor(gridToX(i), gridToY(i), block2Array_.at(0).getFillColor());
 			}
-			SET_BLOCK2_STARTING_POSITION;
 			currentPosition_ = Block2Position::Horizontal;
 			return false;
 		}
@@ -95,7 +84,6 @@ const bool Block2::isFallingPossible() noexcept
 	}
 	return false; // TODO: Reconsider this return
 }
-
 
 void Block2::moveRight() noexcept
 {
@@ -225,11 +213,6 @@ void Block2::rotate() noexcept
 const array<RectangleShape, 4>& Block2::getBlock1ArrayRef() const noexcept
 {
 	return block2Array_;
-}
-
-const Color& Block2::getColor() const noexcept
-{
-	return block2Array_.at(0).getFillColor();
 }
 
 void Block2::setColor(const Color& color) noexcept

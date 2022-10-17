@@ -33,7 +33,7 @@ const vector<uint8_t> BlockBoard::checkWhichRowsFilled() const noexcept
     {
         for (uint8_t j = 0; j < NUMBER_OF_COLUMNS; j++)
         {
-            if (blockBoard_.at(j).at(i).getFillColor() == Color::Red)
+            if (blockBoard_.at(j).at(i).getFillColor() != Color::White)
             {
                 controlNumber++;
             }
