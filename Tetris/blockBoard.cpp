@@ -8,9 +8,7 @@ BlockBoard::BlockBoard() noexcept
     {
         for (uint8_t j = 0; j < NUMBER_OF_ROWS; j++)
         {
-            blockBoard_.at(i).at(j).setPosition(static_cast<float>(i * GRID + GRID), static_cast<float>(j * GRID + GRID));
-            blockBoard_.at(i).at(j).setSize(Vector2f(GRID, GRID));
-            blockBoard_.at(i).at(j).setFillColor(Color::White);
+            blockBoard_.at(i).at(j) = Color::White;
         }
     }
 }
@@ -33,7 +31,7 @@ const vector<uint8_t> BlockBoard::checkWhichRowsFilled() const noexcept
     {
         for (uint8_t j = 0; j < NUMBER_OF_COLUMNS; j++)
         {
-            if (blockBoard_.at(j).at(i).getFillColor() != Color::White)
+            if (blockBoard_.at(j).at(i) != Color::White)
             {
                 controlNumber++;
             }
@@ -54,10 +52,10 @@ void BlockBoard::deleteFilledRows(const vector<uint8_t>& vectorOfRows) noexcept
     {
         for (auto& column : blockBoard_)
         {
-            column.at(el).setFillColor(Color::White);
+            column.at(el) = Color::White;
             for (uint8_t i = el; i > 0; i--)
             {
-                column.at(i).setFillColor(column.at(i - 1).getFillColor());
+                column.at(i) = column.at(i - 1);
             }
         }
     }
@@ -70,5 +68,5 @@ BoardArray& BlockBoard::getBoardArrayRef() noexcept
 
 void BlockBoard::setFillColor(const uint8_t& x, const uint8_t& y, const Color& color) noexcept
 {
-    blockBoard_.at(x).at(y).setFillColor(color);
+    blockBoard_.at(x).at(y) = color;
 }

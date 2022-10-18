@@ -8,7 +8,7 @@ BlockCreator::BlockCreator(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexce
 	: ptrToBlockBoard_(ptrToBlockBoard)
 {}
 
-unique_ptr<IBlock> BlockCreator::createRandomBlock()
+unique_ptr<IBlock> BlockCreator::createRandomBlock() noexcept
 {
 	unique_ptr<IBlock> createdBlock;
 	uint8_t randomNumber;
@@ -50,5 +50,5 @@ unique_ptr<IBlock> BlockCreator::createRandomBlock()
 		break;
 	}
 
-	return createdBlock;
+	return move(createdBlock);
 }

@@ -9,7 +9,7 @@
 
 using namespace sf;
 using namespace std;
-using BoardArray = array<array<RectangleShape, NUMBER_OF_ROWS>, NUMBER_OF_COLUMNS>;
+using BoardArray = array<array<Color, NUMBER_OF_ROWS>, NUMBER_OF_COLUMNS>;
 
 class BlockBoard
 {

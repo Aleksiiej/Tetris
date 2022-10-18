@@ -22,12 +22,12 @@ int main()
     window.setFramerateLimit(60);
     Event event;
 
-    const Band band{ GRID, GRID };
-    const auto blockBoardPtr = make_shared<BlockBoard>();
-    const EndgameText endgameText;
     GameStatus gameStatus{GameStatus::Ongoing};
+    const Band band{ GRID, GRID };
+    const EndgameText endgameText;
+    const auto blockBoardPtr = make_shared<BlockBoard>();
     BlockCreator blockCreator(blockBoardPtr);
-    unique_ptr<IBlock> ptrToBlock = move(blockCreator.createRandomBlock());
+    auto ptrToBlock = move(blockCreator.createRandomBlock());
 
     while (true)
     {
@@ -72,7 +72,6 @@ int main()
             window.close();
             return 0;
         }
-
         blockBoardPtr->handleFilledRows();
         drawBoard(band, blockBoardPtr, window);
         for (const auto& block : ptrToBlock->getBlock1ArrayRef())
@@ -81,7 +80,6 @@ int main()
         }
         window.display();
         sleep(milliseconds(GAME_SPEED));
-        //ptrToBlock->fall();
         if (ptrToBlock->isFallingPossible())
         {
             ptrToBlock->fall();
@@ -97,9 +95,17 @@ int main()
 
 void drawBoard(const Band& band, const shared_ptr<BlockBoard>& blockBoardPtr, RenderWindow& window) noexcept
 {
-        window.draw(band);
-        for (const auto& innerArray : blockBoardPtr->getBoardArrayRef())
+    window.draw(band);
+
+    RectangleShape singleField; // TODO: figure out how to use smaller class than RectangleShape
+    singleField.setSize(Vector2f{ GRID, GRID });
+    for (uint8_t i = 0; i < NUMBER_OF_COLUMNS; i++)
+    {
+        for (uint8_t j = 0; j < NUMBER_OF_ROWS; j++)
         {
-            for_each(begin(innerArray), end(innerArray), [&window](const auto& block) { window.draw(block); });
+            singleField.setFillColor(blockBoardPtr->getBoardArrayRef().at(i).at(j));
+            singleField.setPosition(static_cast<float>(i * GRID + GRID), static_cast<float>(j * GRID + GRID));
+            window.draw(singleField);
         }
+    }
 }

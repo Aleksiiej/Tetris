@@ -4,7 +4,6 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 
-#include "GlobalValues.hpp"
 #include "IBlock.hpp"
 
 using namespace sf;
@@ -24,6 +23,7 @@ public:
 	const bool checkIfLost() const noexcept override;
 	void fall() noexcept override;
 	const bool isFallingPossible() noexcept override;
+	void setColorsInBlockBoard() const noexcept override;
 	void moveRight() noexcept override;
 	const bool isMoveRightPossible() const noexcept override;
 	void moveLeft() noexcept override;

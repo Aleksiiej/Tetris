@@ -8,6 +8,7 @@ public:
 	virtual const bool checkIfLost() const noexcept = 0;
 	virtual void fall() noexcept = 0;
 	virtual const bool isFallingPossible() noexcept = 0;
+	virtual void setColorsInBlockBoard() const noexcept = 0;
 	virtual void moveRight() noexcept = 0;
 	virtual const bool isMoveRightPossible() const noexcept = 0;
 	virtual void moveLeft() noexcept = 0;
