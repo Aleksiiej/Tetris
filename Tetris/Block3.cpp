@@ -13,13 +13,21 @@ Block3::Block3(BlockBoard& blockBoardRef) noexcept
 	block3Array_.at(0).setPosition((NUMBER_OF_COLUMNS / 2)* GRID - GRID, GRID);
 	block3Array_.at(1).setPosition((NUMBER_OF_COLUMNS / 2)* GRID, GRID);
 	block3Array_.at(2).setPosition((NUMBER_OF_COLUMNS / 2)* GRID + GRID, GRID);
-	block3Array_.at(3).setPosition((NUMBER_OF_COLUMNS / 2)* GRID + 2 * GRID, GRID);
+	block3Array_.at(3).setPosition((NUMBER_OF_COLUMNS / 2)* GRID, 2 * GRID);
 	for_each(begin(block3Array_), end(block3Array_), [](auto& block) { block.setFillColor(Color::Red); });
 }
 
 const bool Block3::checkIfLost() const noexcept
 {
-	return false;;
+	if (block3Array_.at(0).getPosition().y == GRID
+		and (blockBoardRef_.getBoardArrayRef().at(gridToX(0)).at(gridToY(0)) == Color::Red
+		or blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1)) == Color::Red
+		or blockBoardRef_.getBoardArrayRef().at(gridToX(2)).at(gridToY(3)) == Color::Red
+		or blockBoardRef_.getBoardArrayRef().at(gridToX(3)).at(gridToY(3)) == Color::Red))
+	{
+		return false;
+	}
+	return true;
 }
 
 void Block3::fall() noexcept
@@ -29,6 +37,69 @@ void Block3::fall() noexcept
 
 const bool Block3::isFallingPossible() noexcept
 {
+	if (currentPosition_ == Block3Position::FlatOnTop)
+	{
+		if (block3Array_.at(3).getPosition().y >= GRID * NUMBER_OF_ROWS)
+		{
+			setColorsInBlockBoard();
+			return false;
+		}
+		else if (blockBoardRef_.getBoardArrayRef().at(gridToX(0)).at(gridToY(0) + 1) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) + 1) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(2)).at(gridToY(2) + 1) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(3)).at(gridToY(3) + 1) != Color::White)
+		{
+			setColorsInBlockBoard();
+			return false;
+		}
+		return true;
+	}
+	else if (currentPosition_ == Block3Position::FlatOnRigth)
+	{
+		if (block3Array_.at(3).getPosition().y >= GRID * NUMBER_OF_ROWS)
+		{
+			setColorsInBlockBoard();
+			return false;
+		}
+		else if (blockBoardRef_.getBoardArrayRef().at(gridToX(2)).at(gridToY(2) + 1) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(3)).at(gridToY(3) + 1) != Color::White)
+		{
+			setColorsInBlockBoard();
+			return false;
+		}
+		return true;
+	}
+	else if (currentPosition_ == Block3Position::FlatOnBottom)
+	{
+		if (block3Array_.at(0).getPosition().y >= GRID * NUMBER_OF_ROWS)
+		{
+			setColorsInBlockBoard();
+			return false;
+		}
+		else if (blockBoardRef_.getBoardArrayRef().at(gridToX(0)).at(gridToY(0) + 1) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) + 1) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(2)).at(gridToY(2) + 1) != Color::White)
+		{
+			setColorsInBlockBoard();
+			return false;
+		}
+		return true;
+	}
+	else if (currentPosition_ == Block3Position::FlatOnLeft)
+	{
+		if (block3Array_.at(0).getPosition().y >= GRID * NUMBER_OF_ROWS)
+		{
+			setColorsInBlockBoard();
+			return false;
+		}
+		else if (blockBoardRef_.getBoardArrayRef().at(gridToX(0)).at(gridToY(0) + 1) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(3)).at(gridToY(3) + 1) != Color::White)
+		{
+			setColorsInBlockBoard();
+			return false;
+		}
+		return true;
+	}
 	return false;
 }
 
@@ -50,6 +121,22 @@ void Block3::moveRight() noexcept
 
 const bool Block3::isMoveRightPossible() const noexcept
 {
+	if (currentPosition_ == Block3Position::FlatOnTop)
+	{
+
+	}
+	else if (currentPosition_ == Block3Position::FlatOnRigth)
+	{
+
+	}
+	else if (currentPosition_ == Block3Position::FlatOnBottom)
+	{
+
+	}
+	else if (currentPosition_ == Block3Position::FlatOnLeft)
+	{
+
+	}
 	return false;
 }
 

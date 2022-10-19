@@ -2,6 +2,7 @@
 #include "IBlock.hpp"
 #include "Block1.hpp"
 #include "Block2.hpp"
+#include "Block3.hpp"
 #include "blockBoard.hpp"
 
 BlockCreator::BlockCreator(BlockBoard& blockBoardRef) noexcept
@@ -14,7 +15,7 @@ unique_ptr<IBlock> BlockCreator::createRandomBlock() noexcept
 	uint8_t randomNumber;
 
 	mt19937 rng(rd());
-	uniform_int_distribution<> distrib1(0, 1);
+	uniform_int_distribution<> distrib1(0, 2);
 	randomNumber = distrib1(rng);
 	switch (randomNumber)
 	{
@@ -23,6 +24,9 @@ unique_ptr<IBlock> BlockCreator::createRandomBlock() noexcept
 		break;
 	case 1:
 		createdBlock = make_unique<Block2>(blockBoardRef_);
+		break;
+	case 2:
+		createdBlock = make_unique<Block3>(blockBoardRef_);
 		break;
 	}
 
