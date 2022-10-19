@@ -14,7 +14,7 @@
 using namespace sf;
 using namespace std;
 
-void drawBoard(const Band& band, const shared_ptr<BlockBoard>& blockBoardPtr, RenderWindow& window) noexcept;
+void drawBoard(const Band& band, BlockBoard& blockBoardRef, RenderWindow& window) noexcept;
 
 int main()
 {
@@ -25,8 +25,8 @@ int main()
     GameStatus gameStatus{GameStatus::Ongoing};
     const Band band{ GRID, GRID };
     const EndgameText endgameText;
-    const auto blockBoardPtr = make_shared<BlockBoard>();
-    BlockCreator blockCreator(blockBoardPtr);
+    BlockBoard blockBoard;
+    BlockCreator blockCreator(blockBoard);
     auto ptrToBlock = move(blockCreator.createRandomBlock());
 
     while (true)
@@ -65,15 +65,15 @@ int main()
         }
         else
         {
-            drawBoard(band, blockBoardPtr, window);
+            drawBoard(band, blockBoard, window);
             window.draw(endgameText);
             window.display();
             sleep(milliseconds(2000));
             window.close();
             return 0;
         }
-        blockBoardPtr->handleFilledRows();
-        drawBoard(band, blockBoardPtr, window);
+        blockBoard.handleFilledRows();
+        drawBoard(band, blockBoard, window);
         for (const auto& block : ptrToBlock->getBlock1ArrayRef())
         {
             window.draw(block);
@@ -93,7 +93,7 @@ int main()
     return 0;
 }
 
-void drawBoard(const Band& band, const shared_ptr<BlockBoard>& blockBoardPtr, RenderWindow& window) noexcept
+void drawBoard(const Band& band, BlockBoard& blockBoardRef, RenderWindow& window) noexcept
 {
     window.draw(band);
 
@@ -103,7 +103,7 @@ void drawBoard(const Band& band, const shared_ptr<BlockBoard>& blockBoardPtr, Re
     {
         for (uint8_t j = 0; j < NUMBER_OF_ROWS; j++)
         {
-            singleField.setFillColor(blockBoardPtr->getBoardArrayRef().at(i).at(j));
+            singleField.setFillColor(blockBoardRef.getBoardArrayRef().at(i).at(j));
             singleField.setPosition(static_cast<float>(i * GRID + GRID), static_cast<float>(j * GRID + GRID));
             window.draw(singleField);
         }

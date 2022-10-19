@@ -4,8 +4,8 @@
 #include "Block2.hpp"
 #include "blockBoard.hpp"
 
-BlockCreator::BlockCreator(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept
-	: ptrToBlockBoard_(ptrToBlockBoard)
+BlockCreator::BlockCreator(BlockBoard& blockBoardRef) noexcept
+	: blockBoardRef_(blockBoardRef)
 {}
 
 unique_ptr<IBlock> BlockCreator::createRandomBlock() noexcept
@@ -19,10 +19,10 @@ unique_ptr<IBlock> BlockCreator::createRandomBlock() noexcept
 	switch (randomNumber)
 	{
 	case 0:
-		createdBlock = make_unique<Block1>(ptrToBlockBoard_);
+		createdBlock = make_unique<Block1>(blockBoardRef_);
 		break;
 	case 1:
-		createdBlock = make_unique<Block2>(ptrToBlockBoard_);
+		createdBlock = make_unique<Block2>(blockBoardRef_);
 		break;
 	}
 
@@ -50,5 +50,5 @@ unique_ptr<IBlock> BlockCreator::createRandomBlock() noexcept
 		break;
 	}
 
-	return move(createdBlock);
+	return createdBlock;
 }

@@ -20,7 +20,7 @@ class Block2 : public IBlock
 {
 public:
 	Block2() = delete;
-	Block2(const shared_ptr<BlockBoard>& ptrToBlockBoard) noexcept;
+	Block2(BlockBoard& blockBoardRef) noexcept;
 	Block2(const Block2& other) = delete;
 	Block2(const Block2&& other) = delete;
 	~Block2() = default;
@@ -43,7 +43,7 @@ public:
 private:
 	array<RectangleShape, 4> block2Array_;
 	Block2Position currentPosition_{};
-	shared_ptr<BlockBoard> ptrToBlockBoard_{};
+	BlockBoard& blockBoardRef_;
 
 	const uint8_t gridToX(const uint8_t& blockNumber) const noexcept;
 	const uint8_t gridToY(const uint8_t& blockNumber) const noexcept;
