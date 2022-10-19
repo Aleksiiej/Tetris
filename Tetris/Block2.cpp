@@ -207,7 +207,7 @@ void Block2::rotate() noexcept
 	}
 }
 
-const array<RectangleShape, 4>& Block2::getBlock1ArrayRef() const noexcept
+const array<RectangleShape, 4>& Block2::getBlockArrayRef() const noexcept
 {
 	return block2Array_;
 }

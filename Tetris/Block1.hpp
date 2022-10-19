@@ -32,7 +32,7 @@ public:
 	const bool isRotationPossible() const noexcept override;
 	void rotate() noexcept override;
 
-	const array<RectangleShape, 4>& getBlock1ArrayRef() const noexcept override;
+	const array<RectangleShape, 4>& getBlockArrayRef() const noexcept override;
 	void setColor(const Color& color) noexcept;
 
 private:

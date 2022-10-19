@@ -1,29 +1,29 @@
 #pragma once
 
+#include "IBlock.hpp"
+
 #include <array>
 #include <memory>
 #include <SFML/Graphics.hpp>
-
-#include "IBlock.hpp"
 
 using namespace sf;
 using namespace std;
 
 class BlockBoard;
 
-enum class Block2Position
+enum class Block3Position
 {
-	Horizontal, Vertical
+	FlatOnTop, FlatOnRigth, FlatOnBottom, FlatOnLeft
 };
 
-class Block2 : public IBlock
+class Block3 : public IBlock
 {
 public:
-	Block2() = delete;
-	Block2(BlockBoard& blockBoardRef) noexcept;
-	Block2(const Block2& other) = delete;
-	Block2(const Block2&& other) = delete;
-	~Block2() = default;
+	Block3() = delete;
+	Block3(BlockBoard& blockBoardRef) noexcept;
+	Block3(const Block3& other) = delete;
+	Block3(const Block3&& other) = delete;
+	~Block3() = default;
 
 	const bool checkIfLost() const noexcept override;
 	void fall() noexcept override;
@@ -41,14 +41,15 @@ public:
 	void setColor(const Color& color) noexcept;
 
 private:
-	array<RectangleShape, 4> block2Array_;
-	Block2Position currentPosition_{};
+	array<RectangleShape, 4> block3Array_;
+	Block3Position currentPosition_{};
 	BlockBoard& blockBoardRef_;
 
 	const uint8_t gridToX(const uint8_t& blockNumber) const noexcept;
 	const uint8_t gridToY(const uint8_t& blockNumber) const noexcept;
 };
 
-// *----*
-// |0123|
-// *----*
+// *---*
+// |123|
+// | 4 |
+// *---*

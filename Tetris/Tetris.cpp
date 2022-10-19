@@ -74,7 +74,7 @@ int main()
         }
         blockBoard.handleFilledRows();
         drawBoard(band, blockBoard, window);
-        for (const auto& block : ptrToBlock->getBlock1ArrayRef())
+        for (const auto& block : ptrToBlock->getBlockArrayRef())
         {
             window.draw(block);
         }

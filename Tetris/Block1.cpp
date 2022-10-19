@@ -102,7 +102,7 @@ void Block1::moveDown() noexcept
 	}
 }
 
-const array<RectangleShape, 4>& Block1::getBlock1ArrayRef() const noexcept
+const array<RectangleShape, 4>& Block1::getBlockArrayRef() const noexcept
 {
 	return block1Array_;
 }

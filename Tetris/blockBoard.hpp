@@ -2,7 +2,6 @@
 
 #include <algorithm>
 #include <array>
-#include <vector>
 #include <SFML/Graphics.hpp>
 
 #include "GlobalValues.hpp"
