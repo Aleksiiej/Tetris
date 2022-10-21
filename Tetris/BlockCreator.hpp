@@ -24,6 +24,6 @@ public:
 	unique_ptr<IBlock> createRandomBlock() noexcept;
 private:
 	BlockBoard& blockBoardRef_;
-	random_device rd;
+	random_device rd_;
 };
 

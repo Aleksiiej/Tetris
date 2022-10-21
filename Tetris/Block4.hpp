@@ -11,19 +11,19 @@ using namespace std;
 
 class BlockBoard;
 
-enum class Block3Position
+enum class Block4Position
 {
 	FlatOnTop, FlatOnRigth, FlatOnBottom, FlatOnLeft
 };
 
-class Block3 : public IBlock
+class Block4 : public IBlock
 {
 public:
-	Block3() = delete;
-	Block3(BlockBoard& blockBoardRef) noexcept;
-	Block3(const Block3& other) = delete;
-	Block3(const Block3&& other) = delete;
-	~Block3() = default;
+	Block4() = delete;
+	Block4(BlockBoard& blockBoardRef) noexcept;
+	Block4(const Block4& other) = delete;
+	Block4(const Block4&& other) = delete;
+	~Block4() = default;
 
 	const bool checkIfLost() const noexcept override;
 	void fall() noexcept override;
@@ -41,16 +41,16 @@ public:
 	void setColor(const Color& color) noexcept;
 
 private:
-	array<RectangleShape, 4> block3Array_;
-	Block3Position currentPosition_{};
+	array<RectangleShape, 4> block4Array_;
+	Block4Position currentPosition_{};
 	BlockBoard& blockBoardRef_;
 
 	const uint8_t gridToX(const uint8_t& blockNumber) const noexcept;
 	const uint8_t gridToY(const uint8_t& blockNumber) const noexcept;
 };
 
-// *---* *---* *---* *---*
-// |012| | 0 | | 3 | | 2 |
-// | 3 | |31 | |210| | 13|
-// *---* | 2 | *---* | 0 |
-//       *---*       *---*       
+// *---* *--* *---* *--*
+// |012| |30| |  3| |2 |
+// |3  | | 1| |210| |1 |
+// *---* | 2| *---* |03|
+//       *--*       *--*       

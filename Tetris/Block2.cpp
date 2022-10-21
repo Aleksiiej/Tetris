@@ -126,7 +126,7 @@ const bool Block2::isMoveLeftPossible() const noexcept
 	if (currentPosition_ == Block2Position::Horizontal)
 	{
 		if (block2Array_.at(0).getPosition().x <= GRID
-			or blockBoardRef_.getBoardArrayRef().at(gridToX(0) - 1).at(gridToY(3)) != Color::White)
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(0) - 1).at(gridToY(0)) != Color::White)
 		{
 			return false;
 		}
