@@ -46,20 +46,26 @@ int main()
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Right)
                 {
-                    ptrToBlock->moveRight();
+                    if (ptrToBlock->possibilityToChangePosition_)
+                    {
+                        ptrToBlock->moveRight();
+                    }
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Left)
                 {
-                    ptrToBlock->moveLeft();
+                    if (ptrToBlock->possibilityToChangePosition_)
+                    {
+                        ptrToBlock->moveLeft();
+                    }
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Down)
                 {
                     ptrToBlock->moveDown();
-                    ptrToBlock->possibilityOfRotation = false;
+                    ptrToBlock->possibilityToChangePosition_ = false;
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Space)
                 {
-                    if (ptrToBlock->possibilityOfRotation == true)
+                    if (ptrToBlock->possibilityToChangePosition_)
                     {
                         ptrToBlock->rotate();
                     }
