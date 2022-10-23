@@ -19,6 +19,8 @@ public:
 	virtual const array<RectangleShape, 4>& getBlockArrayRef() const noexcept = 0;
 	virtual void setColor(const Color& color) noexcept = 0;
 
+	bool possibilityOfRotation{ true };
+
 private:
 	virtual const uint8_t gridToX(const uint8_t& blockNumber) const noexcept = 0;
 	virtual const uint8_t gridToY(const uint8_t& blockNumber) const noexcept = 0;

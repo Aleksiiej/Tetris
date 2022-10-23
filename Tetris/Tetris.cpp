@@ -37,7 +37,7 @@ int main()
         }
         if (gameStatus == GameStatus::Ongoing)
         {
-            while (window.pollEvent(event))
+             while (window.pollEvent(event))
             {
                 if (event.type == Event::EventType::Closed)
                 {
@@ -55,10 +55,14 @@ int main()
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Down)
                 {
                     ptrToBlock->moveDown();
+                    ptrToBlock->possibilityOfRotation = false;
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Space)
                 {
-                    ptrToBlock->rotate();
+                    if (ptrToBlock->possibilityOfRotation == true)
+                    {
+                        ptrToBlock->rotate();
+                    }
                 }
             }
         }

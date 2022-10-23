@@ -157,7 +157,12 @@ void Block2::moveDown() noexcept
 
 const bool Block2::isRotationPossible() const noexcept
 {
-	if (currentPosition_ == Block2Position::Horizontal)
+	if (block2Array_.at(0).getPosition().y == GRID
+		or block2Array_.at(0).getPosition().y == 2 * GRID)
+	{
+		return false;
+	}
+	else if (currentPosition_ == Block2Position::Horizontal)
 	{
 		if (block2Array_.at(1).getPosition().y > GRID
 			and block2Array_.at(1).getPosition().y < GRID * NUMBER_OF_ROWS - GRID

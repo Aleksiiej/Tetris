@@ -39,19 +39,65 @@ const bool Block5::isFallingPossible() noexcept
 {
 	if (currentPosition_ == Block5Position::FlatOnTop)
 	{
-
+		if (block5Array_.at(3).getPosition().y >= GRID * NUMBER_OF_ROWS)
+		{
+			setColorsInBlockBoard();
+			return false;
+		}
+		else if (blockBoardRef_.getBoardArrayRef().at(gridToX(0)).at(gridToY(0) + 1) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) + 1) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(3)).at(gridToY(3) + 1) != Color::White)
+		{
+			setColorsInBlockBoard();
+			return false;
+		}
+		return true;
 	}
 	else if (currentPosition_ == Block5Position::FlatOnRigth)
 	{
-
+		if (block5Array_.at(2).getPosition().y >= GRID * NUMBER_OF_ROWS)
+		{
+			setColorsInBlockBoard();
+			return false;
+		}
+		else if (blockBoardRef_.getBoardArrayRef().at(gridToX(2)).at(gridToY(2) + 1) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(3)).at(gridToY(3) + 1) != Color::White)
+		{
+			setColorsInBlockBoard();
+			return false;
+		}
+		return true;
 	}
 	else if (currentPosition_ == Block5Position::FlatOnBottom)
 	{
-
+		if (block5Array_.at(1).getPosition().y >= GRID * NUMBER_OF_ROWS)
+		{
+			setColorsInBlockBoard();
+			return false;
+		}
+		else if (blockBoardRef_.getBoardArrayRef().at(gridToX(0)).at(gridToY(0) + 1) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) + 1) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(2)).at(gridToY(2) + 1) != Color::White)
+		{
+			setColorsInBlockBoard();
+			return false;
+		}
+		return true;
 	}
 	else if (currentPosition_ == Block5Position::FlatOnLeft)
 	{
-
+		if (block5Array_.at(0).getPosition().y >= GRID * NUMBER_OF_ROWS)
+		{
+			setColorsInBlockBoard();
+			return false;
+		}
+		else if (blockBoardRef_.getBoardArrayRef().at(gridToX(0)).at(gridToY(0) + 1) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(3)).at(gridToY(3) + 1) != Color::White)
+		{
+			setColorsInBlockBoard();
+			return false;
+		}
+		return true;
 	}
 	return false;
 }
@@ -76,19 +122,45 @@ const bool Block5::isMoveRightPossible() const noexcept
 {
 	if (currentPosition_ == Block5Position::FlatOnTop)
 	{
-
+		if (block5Array_.at(2).getPosition().x >= GRID * NUMBER_OF_COLUMNS
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(2) + 1).at(gridToY(2)) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(3) + 1).at(gridToY(3)) != Color::White)
+		{
+			return false;
+		}
+		return true;
 	}
 	else if (currentPosition_ == Block5Position::FlatOnRigth)
 	{
-
+		if (block5Array_.at(1).getPosition().x >= GRID * NUMBER_OF_COLUMNS
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(0) + 1).at(gridToY(0)) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(1) + 1).at(gridToY(1)) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(2) + 1).at(gridToY(2)) != Color::White)
+		{
+			return false;
+		}
+		return true;
 	}
 	else if (currentPosition_ == Block5Position::FlatOnBottom)
 	{
-
+		if (block5Array_.at(0).getPosition().x >= GRID * NUMBER_OF_COLUMNS
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(0) + 1).at(gridToY(0)) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(3) + 1).at(gridToY(3)) != Color::White)
+		{
+			return false;
+		}
+		return true;
 	}
 	else if (currentPosition_ == Block5Position::FlatOnLeft)
 	{
-
+		if (block5Array_.at(3).getPosition().x >= GRID * NUMBER_OF_COLUMNS
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(0) + 1).at(gridToY(0)) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(1) + 1).at(gridToY(1)) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(3) + 1).at(gridToY(3)) != Color::White)
+		{
+			return false;
+		}
+		return true;
 	}
 	return false;
 }
@@ -105,19 +177,45 @@ const bool Block5::isMoveLeftPossible() const noexcept
 {
 	if (currentPosition_ == Block5Position::FlatOnTop)
 	{
-
+		if (block5Array_.at(0).getPosition().x <= GRID
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(0) - 1).at(gridToY(0)) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(3) - 1).at(gridToY(3)) != Color::White)
+		{
+			return false;
+		}
+		return true;
 	}
 	else if (currentPosition_ == Block5Position::FlatOnRigth)
 	{
-
+		if (block5Array_.at(3).getPosition().x <= GRID
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(0) - 1).at(gridToY(0)) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(1) - 1).at(gridToY(1)) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(3) - 1).at(gridToY(3)) != Color::White)
+		{
+			return false;
+		}
+		return true;
 	}
 	else if (currentPosition_ == Block5Position::FlatOnBottom)
 	{
-
+		if (block5Array_.at(2).getPosition().x <= GRID
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(2) - 1).at(gridToY(2)) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(3) - 1).at(gridToY(3)) != Color::White)
+		{
+			return false;
+		}
+		return true;
 	}
 	else if (currentPosition_ == Block5Position::FlatOnLeft)
 	{
-
+		if (block5Array_.at(1).getPosition().x <= GRID
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(0) - 1).at(gridToY(0)) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(1) - 1).at(gridToY(1)) != Color::White
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(2) - 1).at(gridToY(2)) != Color::White)
+		{
+			return false;
+		}
+		return true;
 	}
 	return false;
 }
@@ -132,21 +230,58 @@ void Block5::moveDown() noexcept
 
 const bool Block5::isRotationPossible() const noexcept
 {
-	if (currentPosition_ == Block5Position::FlatOnTop)
+	if (block5Array_.at(0).getPosition().y >= GRID * NUMBER_OF_ROWS + GRID
+		or block5Array_.at(1).getPosition().y >= GRID * NUMBER_OF_ROWS + GRID
+		or block5Array_.at(2).getPosition().y >= GRID * NUMBER_OF_ROWS + GRID
+		or block5Array_.at(3).getPosition().y == GRID * NUMBER_OF_ROWS + GRID
+		or block5Array_.at(0).getPosition().y == GRID)
 	{
-
+     		return false;
+	}
+	else if (currentPosition_ == Block5Position::FlatOnTop)
+	{
+		if (block5Array_.at(1).getPosition().y < GRID * NUMBER_OF_ROWS
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) - 1) == Color::White
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) - 1).at(gridToY(1) + 1) == Color::White
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) + 1) == Color::White)
+		{
+			return true;
+		}
+		else return false;
 	}
 	else if (currentPosition_ == Block5Position::FlatOnRigth)
 	{
-
+		if (block5Array_.at(1).getPosition().x > GRID
+			and block5Array_.at(1).getPosition().x < GRID * NUMBER_OF_COLUMNS
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) + 1).at(gridToY(1)) == Color::White
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) - 1).at(gridToY(1)) == Color::White
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) - 1).at(gridToY(1) - 1) == Color::White)
+		{
+			return true;
+		}
+		else return false;
 	}
 	else if (currentPosition_ == Block5Position::FlatOnBottom)
 	{
-
+		if (blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) + 1) == Color::White
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) - 1) == Color::White
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) + 1).at(gridToY(1) - 1) == Color::White)
+		{
+			return true;
+		}
+		else return false;
 	}
 	else if (currentPosition_ == Block5Position::FlatOnLeft)
 	{
-
+		if (block5Array_.at(1).getPosition().x > GRID
+			and block5Array_.at(1).getPosition().x < GRID * NUMBER_OF_COLUMNS
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) - 1).at(gridToY(1)) == Color::White
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) + 1) == Color::White
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) + 1).at(gridToY(1) + 1) == Color::White)
+		{
+			return true;
+		}
+		else return false;
 	}
 	return false;
 }
@@ -155,25 +290,32 @@ void Block5::rotate() noexcept
 {
 	if (isRotationPossible())
 	{
-
 		if (currentPosition_ == Block5Position::FlatOnTop)
 		{
-
+			block5Array_.at(0).setPosition(block5Array_.at(0).getPosition().x + GRID, block5Array_.at(0).getPosition().y - GRID);
+			block5Array_.at(2).setPosition(block5Array_.at(2).getPosition().x - GRID, block5Array_.at(2).getPosition().y + GRID);
+			block5Array_.at(3).setPosition(block5Array_.at(3).getPosition().x - 2 * GRID, block5Array_.at(3).getPosition().y);
 			currentPosition_ = Block5Position::FlatOnRigth;
 		}
 		else if (currentPosition_ == Block5Position::FlatOnRigth)
 		{
-
+			block5Array_.at(0).setPosition(block5Array_.at(0).getPosition().x + GRID, block5Array_.at(0).getPosition().y + GRID);
+			block5Array_.at(2).setPosition(block5Array_.at(2).getPosition().x - GRID, block5Array_.at(2).getPosition().y - GRID);
+			block5Array_.at(3).setPosition(block5Array_.at(3).getPosition().x, block5Array_.at(3).getPosition().y - 2 * GRID);
 			currentPosition_ = Block5Position::FlatOnBottom;
 		}
 		else if (currentPosition_ == Block5Position::FlatOnBottom)
 		{
-
+			block5Array_.at(0).setPosition(block5Array_.at(0).getPosition().x - GRID, block5Array_.at(0).getPosition().y + GRID);
+			block5Array_.at(2).setPosition(block5Array_.at(2).getPosition().x + GRID, block5Array_.at(2).getPosition().y - GRID);
+			block5Array_.at(3).setPosition(block5Array_.at(3).getPosition().x + 2 * GRID, block5Array_.at(3).getPosition().y);
 			currentPosition_ = Block5Position::FlatOnLeft;
 		}
 		else if (currentPosition_ == Block5Position::FlatOnLeft)
 		{
-
+			block5Array_.at(0).setPosition(block5Array_.at(0).getPosition().x - GRID, block5Array_.at(0).getPosition().y - GRID);
+			block5Array_.at(2).setPosition(block5Array_.at(2).getPosition().x + GRID, block5Array_.at(2).getPosition().y + GRID);
+			block5Array_.at(3).setPosition(block5Array_.at(3).getPosition().x, block5Array_.at(3).getPosition().y + 2 * GRID);
 			currentPosition_ = Block5Position::FlatOnTop;
 		}
 	}

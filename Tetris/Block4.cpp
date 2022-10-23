@@ -225,14 +225,25 @@ void Block4::moveDown() noexcept
 	while (isFallingPossible())
 	{
 		for_each(begin(block4Array_), end(block4Array_), [](auto& block) { block.move(0, GRID); });
+		possibility = 0;
 	}
 }
 
 const bool Block4::isRotationPossible() const noexcept
 {
-	if (currentPosition_ == Block4Position::FlatOnTop)
+	if (block4Array_.at(0).getPosition().y >= GRID * NUMBER_OF_ROWS + GRID
+		or block4Array_.at(1).getPosition().y >= GRID * NUMBER_OF_ROWS + GRID
+		or block4Array_.at(2).getPosition().y >= GRID * NUMBER_OF_ROWS + GRID
+		or block4Array_.at(3).getPosition().y >= GRID * NUMBER_OF_ROWS + GRID
+		or block4Array_.at(0).getPosition().y == GRID)
 	{
-		if (blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) - 1) == Color::White
+		return false;
+	}
+	if (possibility == 0) return false;
+	else if (currentPosition_ == Block4Position::FlatOnTop)
+	{
+		if (block4Array_.at(1).getPosition().y < GRID * NUMBER_OF_ROWS
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) - 1) == Color::White
 			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) - 1).at(gridToY(1) - 1) == Color::White
 			and blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) + 1) == Color::White)
 		{
@@ -242,7 +253,9 @@ const bool Block4::isRotationPossible() const noexcept
 	}
 	else if (currentPosition_ == Block4Position::FlatOnRigth)
 	{
-		if (blockBoardRef_.getBoardArrayRef().at(gridToX(1) + 1).at(gridToY(1)) == Color::White
+		if (block4Array_.at(1).getPosition().x > GRID
+			and block4Array_.at(1).getPosition().x < GRID * NUMBER_OF_COLUMNS
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) + 1).at(gridToY(1)) == Color::White
 			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) + 1).at(gridToY(1) - 1) == Color::White
 			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) - 1).at(gridToY(1)) == Color::White)
 		{
@@ -252,7 +265,8 @@ const bool Block4::isRotationPossible() const noexcept
 	}
 	else if (currentPosition_ == Block4Position::FlatOnBottom)
 	{
-		if (blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) + 1) == Color::White
+		if (block4Array_.at(1).getPosition().y < GRID * NUMBER_OF_ROWS
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) + 1) == Color::White
 			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) + 1).at(gridToY(1) + 1) == Color::White
 			and blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) - 1) == Color::White)
 		{
@@ -262,9 +276,11 @@ const bool Block4::isRotationPossible() const noexcept
 	}
 	else if (currentPosition_ == Block4Position::FlatOnLeft)
 	{
-		if (blockBoardRef_.getBoardArrayRef().at(gridToX(1) + 1).at(gridToY(1) + 1) == Color::White
-			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) - 1).at(gridToY(1) - 1) == Color::White
-			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) - 2).at(gridToY(1)) == Color::White)
+		if (block4Array_.at(1).getPosition().x > GRID
+			and block4Array_.at(1).getPosition().x < GRID * NUMBER_OF_COLUMNS
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) - 1).at(gridToY(1)) == Color::White
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) + 1).at(gridToY(1)) == Color::White
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) - 1).at(gridToY(1) + 1) == Color::White)
 		{
 			return true;
 		}
@@ -277,7 +293,6 @@ void Block4::rotate() noexcept
 {
 	if (isRotationPossible())
 	{
-
 		if (currentPosition_ == Block4Position::FlatOnTop)
 		{
 			block4Array_.at(0).setPosition(block4Array_.at(0).getPosition().x + GRID, block4Array_.at(0).getPosition().y - GRID);

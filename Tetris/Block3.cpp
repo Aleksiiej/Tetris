@@ -230,9 +230,14 @@ void Block3::moveDown() noexcept
 
 const bool Block3::isRotationPossible() const noexcept
 {
-	if (currentPosition_ == Block3Position::FlatOnTop)
+	if (block3Array_.at(0).getPosition().y == GRID)
 	{
-		if (blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) - 1) == Color::White)
+       		return false;
+	}
+	else if (currentPosition_ == Block3Position::FlatOnTop)
+	{
+		if (block3Array_.at(1).getPosition().y < GRID * NUMBER_OF_ROWS - GRID
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) - 1) == Color::White)
 		{
 			return true;
 		}
@@ -249,7 +254,8 @@ const bool Block3::isRotationPossible() const noexcept
 	}
 	else if (currentPosition_ == Block3Position::FlatOnBottom)
 	{
-		if (blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) - 1) == Color::White)
+		if (block3Array_.at(1).getPosition().y < GRID * NUMBER_OF_ROWS - GRID
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) - 1) == Color::White)
 		{
 			return true;
 		}
