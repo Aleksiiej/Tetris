@@ -6,10 +6,9 @@
 #include "Band.hpp"
 #include "BlockBoard.hpp"
 #include "BlockCreator.hpp"
-#include "Block1.hpp"
-#include "Block2.hpp"
 #include "EndgameText.hpp"
 #include "GlobalValues.hpp"
+#include "IBlock.hpp"
 
 using namespace sf;
 using namespace std;

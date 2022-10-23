@@ -232,19 +232,43 @@ const bool Block4::isRotationPossible() const noexcept
 {
 	if (currentPosition_ == Block4Position::FlatOnTop)
 	{
-
+		if (blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) - 1) == Color::White
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) - 1).at(gridToY(1) - 1) == Color::White
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) + 1) == Color::White)
+		{
+			return true;
+		}
+		else return false;
 	}
 	else if (currentPosition_ == Block4Position::FlatOnRigth)
 	{
-
+		if (blockBoardRef_.getBoardArrayRef().at(gridToX(1) + 1).at(gridToY(1)) == Color::White
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) + 1).at(gridToY(1) - 1) == Color::White
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) - 1).at(gridToY(1)) == Color::White)
+		{
+			return true;
+		}
+		else return false;
 	}
 	else if (currentPosition_ == Block4Position::FlatOnBottom)
 	{
-
+		if (blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) + 1) == Color::White
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) + 1).at(gridToY(1) + 1) == Color::White
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) - 1) == Color::White)
+		{
+			return true;
+		}
+		else return false;
 	}
 	else if (currentPosition_ == Block4Position::FlatOnLeft)
 	{
-
+		if (blockBoardRef_.getBoardArrayRef().at(gridToX(1) + 1).at(gridToY(1) + 1) == Color::White
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) - 1).at(gridToY(1) - 1) == Color::White
+			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) - 2).at(gridToY(1)) == Color::White)
+		{
+			return true;
+		}
+		else return false;
 	}
 	return false;
 }
@@ -256,22 +280,30 @@ void Block4::rotate() noexcept
 
 		if (currentPosition_ == Block4Position::FlatOnTop)
 		{
-
+			block4Array_.at(0).setPosition(block4Array_.at(0).getPosition().x + GRID, block4Array_.at(0).getPosition().y - GRID);
+			block4Array_.at(2).setPosition(block4Array_.at(2).getPosition().x - GRID, block4Array_.at(2).getPosition().y + GRID);
+			block4Array_.at(3).setPosition(block4Array_.at(3).getPosition().x, block4Array_.at(3).getPosition().y - 2 * GRID);
 			currentPosition_ = Block4Position::FlatOnRigth;
 		}
 		else if (currentPosition_ == Block4Position::FlatOnRigth)
 		{
-
+			block4Array_.at(0).setPosition(block4Array_.at(0).getPosition().x + GRID, block4Array_.at(0).getPosition().y + GRID);
+			block4Array_.at(2).setPosition(block4Array_.at(2).getPosition().x - GRID, block4Array_.at(2).getPosition().y - GRID);
+			block4Array_.at(3).setPosition(block4Array_.at(3).getPosition().x + 2 * GRID, block4Array_.at(3).getPosition().y);
 			currentPosition_ = Block4Position::FlatOnBottom;
 		}
 		else if (currentPosition_ == Block4Position::FlatOnBottom)
 		{
-
+			block4Array_.at(0).setPosition(block4Array_.at(0).getPosition().x - GRID, block4Array_.at(0).getPosition().y + GRID);
+			block4Array_.at(2).setPosition(block4Array_.at(2).getPosition().x + GRID, block4Array_.at(2).getPosition().y - GRID);
+			block4Array_.at(3).setPosition(block4Array_.at(3).getPosition().x, block4Array_.at(3).getPosition().y + 2 * GRID);
 			currentPosition_ = Block4Position::FlatOnLeft;
 		}
 		else if (currentPosition_ == Block4Position::FlatOnLeft)
 		{
-
+			block4Array_.at(0).setPosition(block4Array_.at(0).getPosition().x - GRID, block4Array_.at(0).getPosition().y - GRID);
+			block4Array_.at(2).setPosition(block4Array_.at(2).getPosition().x + GRID, block4Array_.at(2).getPosition().y + GRID);
+			block4Array_.at(3).setPosition(block4Array_.at(3).getPosition().x - 2 * GRID, block4Array_.at(3).getPosition().y);
 			currentPosition_ = Block4Position::FlatOnTop;
 		}
 	}

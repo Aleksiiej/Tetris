@@ -4,6 +4,7 @@
 #include "Block2.hpp"
 #include "Block3.hpp"
 #include "Block4.hpp"
+#include "Block5.hpp"
 #include "blockBoard.hpp"
 
 BlockCreator::BlockCreator(BlockBoard& blockBoardRef) noexcept

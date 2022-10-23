@@ -7,9 +7,6 @@ using namespace sf;
 using namespace std;
 
 class IBlock;
-class Block1;
-class Block2;
-class Block3;
 class BlockBoard;
 
 class BlockCreator

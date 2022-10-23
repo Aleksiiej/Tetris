@@ -55,13 +55,13 @@ const bool Block3::isFallingPossible() noexcept
 	}
 	else if (currentPosition_ == Block3Position::FlatOnRigth)
 	{
-		if (block3Array_.at(3).getPosition().y >= GRID * NUMBER_OF_ROWS)
+		if (block3Array_.at(2).getPosition().y >= GRID * NUMBER_OF_ROWS)
 		{
 			setColorsInBlockBoard();
 			return false;
 		}
 		else if (blockBoardRef_.getBoardArrayRef().at(gridToX(2)).at(gridToY(2) + 1) != Color::White
-			or blockBoardRef_.getBoardArrayRef().at(gridToX(3)).at(gridToY(3) + 1) != Color::White)
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(3)).at(gridToY(3) + 1) != Color::White) //TODO
 		{
 			setColorsInBlockBoard();
 			return false;

@@ -42,6 +42,9 @@
     <ClCompile Include="Block4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Block5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Band.hpp">
@@ -72,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Block4.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Block5.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
