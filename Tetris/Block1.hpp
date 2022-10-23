@@ -4,6 +4,7 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 
+#include "BlockFunctions.hpp"
 #include "IBlock.hpp"
 
 using namespace sf;
@@ -11,7 +12,7 @@ using namespace std;
 
 class BlockBoard;
 
-class Block1 : public IBlock
+class Block1 : public IBlock, public BlockFunctions
 {
 public:
 	Block1() = delete;

@@ -159,6 +159,7 @@
     <ClCompile Include="BlockBoard.cpp" />
     <ClCompile Include="Block1.cpp" />
     <ClCompile Include="BlockCreator.cpp" />
+    <ClCompile Include="BlockFunctions.cpp" />
     <ClCompile Include="EndgameText.cpp" />
     <ClCompile Include="Tetris.cpp" />
   </ItemGroup>
@@ -171,6 +172,7 @@
     <ClInclude Include="BlockBoard.hpp" />
     <ClInclude Include="Block1.hpp" />
     <ClInclude Include="BlockCreator.hpp" />
+    <ClInclude Include="BlockFunctions.hpp" />
     <ClInclude Include="EndgameText.hpp" />
     <ClInclude Include="GlobalValues.hpp" />
     <ClInclude Include="IBlock.hpp" />
