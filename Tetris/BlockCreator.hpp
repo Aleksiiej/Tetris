@@ -6,7 +6,7 @@
 using namespace sf;
 using namespace std;
 
-class IBlock;
+class BaseBlock;
 class BlockBoard;
 
 class BlockCreator
@@ -18,7 +18,7 @@ public:
 	BlockCreator(const BlockCreator&& other) = delete;
 	~BlockCreator() = default;
 
-	unique_ptr<IBlock> createRandomBlock() noexcept;
+	unique_ptr<BaseBlock> createRandomBlock() noexcept;
 private:
 	BlockBoard& blockBoardRef_;
 	random_device rd_;

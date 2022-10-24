@@ -1,5 +1,5 @@
 #include "BlockCreator.hpp"
-#include "IBlock.hpp"
+#include "BaseBlock.hpp"
 #include "Block1.hpp"
 #include "Block2.hpp"
 #include "Block3.hpp"
@@ -11,20 +11,20 @@ BlockCreator::BlockCreator(BlockBoard& blockBoardRef) noexcept
 	: blockBoardRef_(blockBoardRef)
 {}
 
-unique_ptr<IBlock> BlockCreator::createRandomBlock() noexcept
+unique_ptr<BaseBlock> BlockCreator::createRandomBlock() noexcept
 {
-	unique_ptr<IBlock> createdBlock;
+	unique_ptr<BaseBlock> createdBlock;
 	uint8_t randomNumber;
 
 	mt19937 rng(rd_());
-	uniform_int_distribution<> distrib1(0, 4);
+	uniform_int_distribution<> distrib1(0, 0);
 	randomNumber = distrib1(rng);
 	switch (randomNumber)
 	{
 	case 0:
 		createdBlock = make_unique<Block1>(blockBoardRef_);
 		break;
-	case 1:
+	/*case 1:
 		createdBlock = make_unique<Block2>(blockBoardRef_);
 		break;
 	case 2:
@@ -35,7 +35,7 @@ unique_ptr<IBlock> BlockCreator::createRandomBlock() noexcept
 		break;
 	case 4:
 		createdBlock = make_unique<Block5>(blockBoardRef_);
-		break;
+		break;*/
 	}
 
 	uniform_int_distribution<> distrib2(0, 5);

@@ -46,6 +46,11 @@ const array<RectangleShape, 4>& BaseBlock::getBlockArrayRef() const noexcept
 	return blockArray_;
 }
 
+const bool& BaseBlock::getPossibilityToChangePosition() const noexcept
+{
+	return possibilityToChangePosition_;
+}
+
 const uint8_t BaseBlock::gridToX(const uint8_t& blockNumber) const noexcept
 {
 	switch (blockNumber)

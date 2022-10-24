@@ -26,8 +26,9 @@ public:
 	void setColor(const Color& color) noexcept;
 	void setColorsInBlockBoard() const noexcept;
 	const array<RectangleShape, 4>& getBlockArrayRef() const noexcept;
+	const bool& getPossibilityToChangePosition() const noexcept;
 
-private:
+protected:
 	array<RectangleShape, 4> blockArray_;
 	BlockBoard& blockBoardRef_;
 	bool possibilityToChangePosition_{ true };

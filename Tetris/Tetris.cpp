@@ -48,7 +48,7 @@ int main()
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Right)
                 {
-                    if (ptrToBlock->possibilityToChangePosition_)
+                    if (ptrToBlock->getPossibilityToChangePosition())
                     {
                         ptrToBlock->moveRight();
                     }
@@ -67,7 +67,7 @@ int main()
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Space)
                 {
-                    if (ptrToBlock->possibilityToChangePosition_)
+                    if (ptrToBlock->getPossibilityToChangePosition())
                     {
                         ptrToBlock->rotate();
                     }
