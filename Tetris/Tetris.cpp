@@ -9,6 +9,7 @@
 #include "EndgameText.hpp"
 #include "GlobalValues.hpp"
 #include "IBlock.hpp"
+#include "Block1.hpp"
 
 using namespace sf;
 using namespace std;
@@ -26,7 +27,8 @@ int main()
     const EndgameText endgameText;
     BlockBoard blockBoard;
     BlockCreator blockCreator(blockBoard);
-    auto ptrToBlock = move(blockCreator.createRandomBlock());
+    //auto ptrToBlock = move(blockCreator.createRandomBlock());
+    auto ptrToBlock = move(make_unique<Block1>(blockBoard));
 
     while (true)
     {
@@ -53,15 +55,15 @@ int main()
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Left)
                 {
-                    if (ptrToBlock->possibilityToChangePosition_)
-                    {
+                    //if (ptrToBlock->possibilityToChangePosition_)
+                    //{
                         ptrToBlock->moveLeft();
-                    }
+                    //}
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Down)
                 {
                     ptrToBlock->moveDown();
-                    ptrToBlock->possibilityToChangePosition_ = false;
+                    //ptrToBlock->possibilityToChangePosition_ = false;
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Space)
                 {
@@ -96,7 +98,8 @@ int main()
         else
         {
             ptrToBlock.reset(nullptr);
-            ptrToBlock = move(blockCreator.createRandomBlock());
+            //ptrToBlock = move(blockCreator.createRandomBlock());
+            ptrToBlock = move(make_unique<Block1>(blockBoard));
         }
     }
     return 0;

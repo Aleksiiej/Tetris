@@ -225,7 +225,6 @@ void Block4::moveDown() noexcept
 	while (isFallingPossible())
 	{
 		for_each(begin(block4Array_), end(block4Array_), [](auto& block) { block.move(0, GRID); });
-		possibility = 0;
 	}
 }
 
@@ -239,7 +238,6 @@ const bool Block4::isRotationPossible() const noexcept
 	{
 		return false;
 	}
-	if (possibility == 0) return false;
 	else if (currentPosition_ == Block4Position::FlatOnTop)
 	{
 		if (block4Array_.at(1).getPosition().y < GRID * NUMBER_OF_ROWS

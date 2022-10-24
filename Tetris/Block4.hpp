@@ -44,7 +44,6 @@ private:
 	array<RectangleShape, 4> block4Array_;
 	Block4Position currentPosition_{};
 	BlockBoard& blockBoardRef_;
-	int possibility{ 1 };
 
 	const uint8_t gridToX(const uint8_t& blockNumber) const noexcept;
 	const uint8_t gridToY(const uint8_t& blockNumber) const noexcept;

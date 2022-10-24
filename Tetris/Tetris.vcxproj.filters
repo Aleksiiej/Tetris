@@ -45,7 +45,7 @@
     <ClCompile Include="Block5.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BlockFunctions.cpp">
+    <ClCompile Include="BaseBlock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,7 +83,7 @@
     <ClInclude Include="Block5.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BlockFunctions.hpp">
+    <ClInclude Include="BaseBlock.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
