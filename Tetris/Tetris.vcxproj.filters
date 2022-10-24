@@ -62,9 +62,6 @@
     <ClInclude Include="EndgameText.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IBlock.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Block1.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

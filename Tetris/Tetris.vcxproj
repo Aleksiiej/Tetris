@@ -175,7 +175,6 @@
     <ClInclude Include="BlockFunctions.hpp" />
     <ClInclude Include="EndgameText.hpp" />
     <ClInclude Include="GlobalValues.hpp" />
-    <ClInclude Include="IBlock.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

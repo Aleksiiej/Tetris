@@ -1,18 +1,28 @@
 #pragma once
 
+<<<<<<< HEAD
 #include <array>
 #include <memory>
 #include <SFML/Graphics.hpp>
 
 #include "BlockFunctions.hpp"
 #include "IBlock.hpp"
+=======
+#include "BaseBlock.hpp"
+>>>>>>> 3e7c217 (Class BaseBlock completed)
+
+#include <SFML/Graphics.hpp>
 
 using namespace sf;
 using namespace std;
 
 class BlockBoard;
 
+<<<<<<< HEAD
 class Block1 : public IBlock, public BlockFunctions
+=======
+class Block1: public BaseBlock
+>>>>>>> 3e7c217 (Class BaseBlock completed)
 {
 public:
 	Block1() = delete;

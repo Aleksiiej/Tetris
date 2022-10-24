@@ -18,8 +18,13 @@ Block1::Block1(BlockBoard& blockBoardRef) noexcept
 
 const bool Block1::checkIfLost() const noexcept
 {
+<<<<<<< HEAD
 	if (block1Array_.at(0).getPosition().y == GRID
 	  and ( blockBoardRef_.getBoardArrayRef().at(gridToX(2)).at(gridToY(2)) == Color::Red
+=======
+	if (blockArray_.at(0).getPosition().y == GRID
+	  and (blockBoardRef_.getBoardArrayRef().at(gridToX(2)).at(gridToY(2)) == Color::Red
+>>>>>>> 3e7c217 (Class BaseBlock completed)
 	  or blockBoardRef_.getBoardArrayRef().at(gridToX(3)).at(gridToY(3)) == Color::Red))
 	{
 	   return false;
