@@ -9,6 +9,9 @@
 #include "EndgameText.hpp"
 #include "GlobalValues.hpp"
 #include "Block1.hpp"
+=======
+#include "Block1.hpp"
+>>>>>>> 3e7c217 (Class BaseBlock completed)
 
 using namespace sf;
 using namespace std;
@@ -54,6 +57,9 @@ int main()
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Left)
                 {
                     if (ptrToBlock->getPossibilityToChangePosition())
+=======
+                    if (ptrToBlock->getPossibilityToChangePosition())
+>>>>>>> 3e7c217 (Class BaseBlock completed)
                     {
                         ptrToBlock->moveLeft();
                     }
@@ -62,6 +68,9 @@ int main()
                 {
                     ptrToBlock->moveDown();
                     ptrToBlock->setPossibilityToChangePosition(false);
+=======
+                    ptrToBlock->setPossibilityToChangePosition(false);
+>>>>>>> 3e7c217 (Class BaseBlock completed)
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Space)
                 {
