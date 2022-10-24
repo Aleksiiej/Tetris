@@ -97,7 +97,6 @@ int main()
         else
         {
             ptrToBlock.reset(nullptr);
-            //ptrToBlock = move(blockCreator.createRandomBlock());
             ptrToBlock = move(make_unique<Block1>(blockBoard));
         }
     }
