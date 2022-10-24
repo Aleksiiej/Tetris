@@ -26,7 +26,6 @@ int main()
     const EndgameText endgameText;
     BlockBoard blockBoard;
     BlockCreator blockCreator(blockBoard);
-    //auto ptrToBlock = move(blockCreator.createRandomBlock());
     auto ptrToBlock = move(make_unique<Block1>(blockBoard));
 
     while (true)
