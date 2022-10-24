@@ -25,6 +25,7 @@ public:
 
 	void setColor(const Color& color) noexcept;
 	void setColorsInBlockBoard() const noexcept;
+	void setPossibilityToChangePosition(const bool& possibility) noexcept;
 	const array<RectangleShape, 4>& getBlockArrayRef() const noexcept;
 	const bool& getPossibilityToChangePosition() const noexcept;
 

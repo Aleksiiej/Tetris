@@ -8,7 +8,6 @@
 #include "BlockCreator.hpp"
 #include "EndgameText.hpp"
 #include "GlobalValues.hpp"
-#include "IBlock.hpp"
 #include "Block1.hpp"
 
 using namespace sf;
@@ -55,15 +54,15 @@ int main()
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Left)
                 {
-                    //if (ptrToBlock->possibilityToChangePosition_)
-                    //{
+                    if (ptrToBlock->getPossibilityToChangePosition())
+                    {
                         ptrToBlock->moveLeft();
-                    //}
+                    }
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Down)
                 {
                     ptrToBlock->moveDown();
-                    //ptrToBlock->possibilityToChangePosition_ = false;
+                    ptrToBlock->setPossibilityToChangePosition(false);
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Space)
                 {

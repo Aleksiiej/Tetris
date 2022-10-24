@@ -41,6 +41,11 @@ void BaseBlock::setColorsInBlockBoard() const noexcept
 	}
 }
 
+void BaseBlock::setPossibilityToChangePosition(const bool& possibility) noexcept
+{
+	possibilityToChangePosition_ = possibility;
+}
+
 const array<RectangleShape, 4>& BaseBlock::getBlockArrayRef() const noexcept
 {
 	return blockArray_;

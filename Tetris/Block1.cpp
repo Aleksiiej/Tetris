@@ -16,7 +16,7 @@ Block1::Block1(BlockBoard& blockBoardRef) noexcept
 const bool Block1::checkIfLost() const noexcept
 {
 	if (blockArray_.at(0).getPosition().y == GRID
-	  and ( blockBoardRef_.getBoardArrayRef().at(gridToX(2)).at(gridToY(2)) == Color::Red
+	  and (blockBoardRef_.getBoardArrayRef().at(gridToX(2)).at(gridToY(2)) == Color::Red
 	  or blockBoardRef_.getBoardArrayRef().at(gridToX(3)).at(gridToY(3)) == Color::Red))
 	{
 	   return false;

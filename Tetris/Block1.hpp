@@ -1,15 +1,15 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
 #include "BaseBlock.hpp"
+
+#include <SFML/Graphics.hpp>
 
 using namespace sf;
 using namespace std;
 
 class BlockBoard;
 
-class Block1 : public BaseBlock
+class Block1: public BaseBlock
 {
 public:
 	Block1() = delete;
