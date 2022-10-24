@@ -10,9 +10,6 @@ using namespace std;
 class BlockBoard;
 
 class Block1: public BaseBlock
-=======
-class Block1: public BaseBlock
->>>>>>> 3e7c217 (Class BaseBlock completed)
 {
 public:
 	Block1() = delete;
