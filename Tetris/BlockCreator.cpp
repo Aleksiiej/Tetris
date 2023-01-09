@@ -17,7 +17,7 @@ unique_ptr<BaseBlock> BlockCreator::createRandomBlock() noexcept
 	uint8_t randomNumber;
 
 	mt19937 rng(rd_());
-	uniform_int_distribution<> distrib1(0, 4);
+	uniform_int_distribution<> distrib1(0,4);
 	randomNumber = distrib1(rng);
 	switch (randomNumber)
 	{
