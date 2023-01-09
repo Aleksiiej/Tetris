@@ -23,11 +23,6 @@ void BaseBlock::moveLeft() noexcept
 	for_each(begin(blockArray_), end(blockArray_), [](auto& block) { block.move(-GRID, 0); });
 }
 
-void BaseBlock::moveDown() noexcept
-{
-	for_each(begin(blockArray_), end(blockArray_), [](auto& block) { block.move(0, GRID); });
-}
-
 void BaseBlock::setColor(const Color& color) noexcept
 {
 	for_each(begin(blockArray_), end(blockArray_), [&](auto& block) { block.setFillColor(color); });
@@ -41,19 +36,9 @@ void BaseBlock::setColorsInBlockBoard() const noexcept
 	}
 }
 
-void BaseBlock::setPossibilityToChangePosition(const bool& possibility) noexcept
-{
-	possibilityToChangePosition_ = possibility;
-}
-
 const array<RectangleShape, 4>& BaseBlock::getBlockArrayRef() const noexcept
 {
 	return blockArray_;
-}
-
-const bool& BaseBlock::getPossibilityToChangePosition() const noexcept
-{
-	return possibilityToChangePosition_;
 }
 
 const uint8_t BaseBlock::gridToX(const uint8_t& blockNumber) const noexcept

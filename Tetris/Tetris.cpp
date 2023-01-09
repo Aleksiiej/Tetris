@@ -6,9 +6,13 @@
 #include "Band.hpp"
 #include "BlockBoard.hpp"
 #include "BlockCreator.hpp"
+#include "Block1.hpp"
+#include "Block2.hpp"
+#include "Block3.hpp"
+#include "Block4.hpp"
+#include "Block5.hpp"
 #include "EndgameText.hpp"
 #include "GlobalValues.hpp"
-#include "Block1.hpp"
 
 using namespace sf;
 using namespace std;
@@ -26,7 +30,7 @@ int main()
     const EndgameText endgameText;
     BlockBoard blockBoard;
     BlockCreator blockCreator(blockBoard);
-    auto ptrToBlock = move(make_unique<Block1>(blockBoard));
+    unique_ptr<BaseBlock> ptrToBlock = move(blockCreator.createRandomBlock());
 
     while (true)
     {
@@ -38,39 +42,41 @@ int main()
         if (gameStatus == GameStatus::Ongoing)
         {
              while (window.pollEvent(event))
-            {
-                if (event.type == Event::EventType::Closed)
+             {
+                if(event.type == Event::EventType::Closed)
                 {
                     window.close();
                     break;
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Right)
                 {
-                    if (ptrToBlock->getPossibilityToChangePosition())
+                    if(ptrToBlock->isMoveRightPossible())
                     {
                         ptrToBlock->moveRight();
                     }
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Left)
                 {
-                    if (ptrToBlock->getPossibilityToChangePosition())
+                    if(ptrToBlock->isMoveLeftPossible())
                     {
                         ptrToBlock->moveLeft();
                     }
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Down)
                 {
-                    ptrToBlock->moveDown();
-                    ptrToBlock->setPossibilityToChangePosition(false);
+                    while(ptrToBlock->isFallingPossible())
+                    {
+                         ptrToBlock->fall();
+                    }
                 }
                 if (event.type == Event::EventType::KeyPressed and event.key.code == Keyboard::Space)
                 {
-                    if (ptrToBlock->getPossibilityToChangePosition())
+                    if (ptrToBlock->isRotationPossible())
                     {
                         ptrToBlock->rotate();
                     }
                 }
-            }
+             }
         }
         else
         {
@@ -96,7 +102,7 @@ int main()
         else
         {
             ptrToBlock.reset(nullptr);
-            ptrToBlock = move(make_unique<Block1>(blockBoard));
+            ptrToBlock = move(blockCreator.createRandomBlock());
         }
     }
     return 0;

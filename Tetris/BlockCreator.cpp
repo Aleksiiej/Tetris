@@ -17,14 +17,14 @@ unique_ptr<BaseBlock> BlockCreator::createRandomBlock() noexcept
 	uint8_t randomNumber;
 
 	mt19937 rng(rd_());
-	uniform_int_distribution<> distrib1(0, 0);
+	uniform_int_distribution<> distrib1(0, 4);
 	randomNumber = distrib1(rng);
 	switch (randomNumber)
 	{
 	case 0:
 		createdBlock = make_unique<Block1>(blockBoardRef_);
 		break;
-	/*case 1:
+	case 1:
 		createdBlock = make_unique<Block2>(blockBoardRef_);
 		break;
 	case 2:
@@ -35,7 +35,7 @@ unique_ptr<BaseBlock> BlockCreator::createRandomBlock() noexcept
 		break;
 	case 4:
 		createdBlock = make_unique<Block5>(blockBoardRef_);
-		break;*/
+		break;
 	}
 
 	uniform_int_distribution<> distrib2(0, 5);
