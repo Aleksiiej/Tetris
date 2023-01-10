@@ -25,8 +25,7 @@ int main()
     const Band band{ GRID, GRID };
     const EndgameText endgameText;
     BlockBoard blockBoard;
-    BlockCreator blockCreator(blockBoard);
-    unique_ptr<BaseBlock> ptrToBlock = move(blockCreator.createRandomBlock());
+    unique_ptr<BaseBlock> ptrToBlock = move(BlockCreator::createRandomBlock(blockBoard));
 
     while (true)
     {
@@ -98,7 +97,7 @@ int main()
         else
         {
             ptrToBlock.reset(nullptr);
-            ptrToBlock = move(blockCreator.createRandomBlock());
+            ptrToBlock = move(BlockCreator::createRandomBlock(blockBoard));
         }
     }
     return 0;

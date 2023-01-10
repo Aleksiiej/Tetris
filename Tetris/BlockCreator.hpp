@@ -1,4 +1,5 @@
 #pragma once
+
 #include <memory>
 #include <random>
 #include <SFML/Graphics.hpp>
@@ -13,14 +14,10 @@ class BlockCreator
 {
 public:
 	BlockCreator() = delete;
-	BlockCreator(BlockBoard& blockBoardRef) noexcept;
 	BlockCreator(const BlockCreator& other) = delete;
 	BlockCreator(const BlockCreator&& other) = delete;
 	~BlockCreator() = default;
 
-	unique_ptr<BaseBlock> createRandomBlock() noexcept;
-private:
-	BlockBoard& blockBoardRef_;
-	random_device rd_;
+	static unique_ptr<BaseBlock> createRandomBlock(BlockBoard& blockBoardRef_) noexcept;
 };
 
