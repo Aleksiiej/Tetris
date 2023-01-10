@@ -6,11 +6,7 @@
 #include "Band.hpp"
 #include "BlockBoard.hpp"
 #include "BlockCreator.hpp"
-#include "Block1.hpp"
-#include "Block2.hpp"
-#include "Block3.hpp"
-#include "Block4.hpp"
-#include "Block5.hpp"
+#include "BaseBlock.hpp"
 #include "EndgameText.hpp"
 #include "GlobalValues.hpp"
 
