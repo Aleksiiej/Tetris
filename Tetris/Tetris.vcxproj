@@ -157,6 +157,7 @@
     <ClCompile Include="Block4.cpp" />
     <ClCompile Include="Block5.cpp" />
     <ClCompile Include="Block6.cpp" />
+    <ClCompile Include="Block7.cpp" />
     <ClCompile Include="BlockBoard.cpp" />
     <ClCompile Include="Block1.cpp" />
     <ClCompile Include="BlockCreator.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Block4.hpp" />
     <ClInclude Include="Block5.hpp" />
     <ClInclude Include="Block6.hpp" />
+    <ClInclude Include="Block7.hpp" />
     <ClInclude Include="BlockBoard.hpp" />
     <ClInclude Include="Block1.hpp" />
     <ClInclude Include="BlockCreator.hpp" />

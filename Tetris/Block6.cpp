@@ -30,7 +30,7 @@ const bool Block6::isFallingPossible() noexcept
 {
 	if (currentPosition_ == Block6Position::Horizontal)
 	{
-		if (blockArray_.at(0).getPosition().y and blockArray_.at(1).getPosition().y >= GRID * NUMBER_OF_ROWS)
+		if (blockArray_.at(1).getPosition().y >= GRID * NUMBER_OF_ROWS)
 		{
 			setColorsInBlockBoard();
 			return false;
@@ -116,12 +116,7 @@ const bool Block6::isMoveLeftPossible() const noexcept
 
 const bool Block6::isRotationPossible() const noexcept
 {
-	if (blockArray_.at(1).getPosition().y > GRID * NUMBER_OF_ROWS - GRID
-		or blockArray_.at(1).getPosition().x == GRID)
-	{
-		return false;
-	}
-	else if (currentPosition_ == Block6Position::Horizontal)
+	if (currentPosition_ == Block6Position::Horizontal)
 	{
 		if (blockArray_.at(0).getPosition().y < GRID * NUMBER_OF_ROWS
 			and blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1) - 1) == Color::White
@@ -134,7 +129,7 @@ const bool Block6::isRotationPossible() const noexcept
 	}
 	else if (currentPosition_ == Block6Position::Vertical)
 	{
-		if (blockArray_.at(3).getPosition().x <= GRID * NUMBER_OF_COLUMNS
+		if (blockArray_.at(1).getPosition().x > GRID
 			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) - 1).at(gridToY(1)) == Color::White
 			and blockBoardRef_.getBoardArrayRef().at(gridToX(1) + 1).at(gridToY(1) - 1) == Color::White)
 		{

@@ -9,19 +9,19 @@ using namespace std;
 
 class BlockBoard;
 
-enum class Block6Position
+enum class Block7Position
 {
 	Horizontal, Vertical
 };
 
-class Block6 : public BaseBlock
+class Block7 : public BaseBlock
 {
 public:
-	Block6() = delete;
-	Block6(BlockBoard& blockBoardRef) noexcept;
-	Block6(const Block6& other) = delete;
-	Block6(const Block6&& other) = delete;
-	~Block6() = default;
+	Block7() = delete;
+	Block7(BlockBoard& blockBoardRef) noexcept;
+	Block7(const Block7& other) = delete;
+	Block7(const Block7&& other) = delete;
+	~Block7() = default;
 
 	const bool checkIfLost() const noexcept;
 	const bool isFallingPossible() noexcept;
@@ -31,11 +31,11 @@ public:
 	void rotate() noexcept;
 
 private:
-	Block6Position currentPosition_{};
+	Block7Position currentPosition_{};
 };
 
 // *---* *---*
-// | 23| | 0 |
-// |01 | | 12|
-// |   | |  3|
+// |   | | 0 |
+// |01 | |21 |
+// | 23| |3  |
 // *---* *---*
