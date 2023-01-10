@@ -165,3 +165,5 @@ void Block6::rotate() noexcept
 		}
 	}
 }
+
+// TODO: Something wrong when rotating near left band
