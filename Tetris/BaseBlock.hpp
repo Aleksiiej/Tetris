@@ -21,7 +21,6 @@ public:
 	void fall() noexcept;
 	void moveRight() noexcept;
 	void moveLeft() noexcept;
-	void moveDown() noexcept;
 
 	virtual const bool checkIfLost() const noexcept { return false; }
 	virtual const bool isFallingPossible() noexcept { return false; }
