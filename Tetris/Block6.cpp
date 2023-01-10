@@ -116,8 +116,7 @@ const bool Block6::isMoveLeftPossible() const noexcept
 
 const bool Block6::isRotationPossible() const noexcept
 {
-	if (/*blockArray_.at(0).getPosition().y > GRID * NUMBER_OF_ROWS - GRID*/ // TODO: Maybe this if statement is redundant
-		blockArray_.at(1).getPosition().y > GRID * NUMBER_OF_ROWS - GRID
+	if (blockArray_.at(1).getPosition().y > GRID * NUMBER_OF_ROWS - GRID
 		or blockArray_.at(1).getPosition().x == GRID)
 	{
 		return false;
@@ -166,5 +165,3 @@ void Block6::rotate() noexcept
 		}
 	}
 }
-
-// TODO: Something wrong when rotating near left band
