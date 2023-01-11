@@ -1,8 +1,8 @@
 #pragma once
 
-#include "BaseBlock.hpp"
-
 #include <SFML/Graphics.hpp>
+
+#include "BaseBlock.hpp"
 
 using namespace sf;
 using namespace std;

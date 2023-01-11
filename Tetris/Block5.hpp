@@ -1,18 +1,13 @@
 #pragma once
 
-#include "BaseBlock.hpp"
-
 #include <SFML/Graphics.hpp>
+
+#include "BaseBlock.hpp"
 
 using namespace sf;
 using namespace std;
 
 class BlockBoard;
-
-enum class Block5Position
-{
-	FlatOnTop, FlatOnRigth, FlatOnBottom, FlatOnLeft
-};
 
 class Block5 : public BaseBlock
 {
@@ -31,7 +26,7 @@ public:
 	void rotate() noexcept;
 
 private:
-	Block5Position currentPosition_{};
+	FourBlockPositions currentPosition_{};
 };
 
 // *---* *--* *---* *--*

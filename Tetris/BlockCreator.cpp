@@ -14,8 +14,8 @@ unique_ptr<BaseBlock> BlockCreator::createRandomBlock(BlockBoard& blockBoardRef_
 	unique_ptr<BaseBlock> createdBlock;
 	uint8_t randomNumber;
 
-	random_device rd_;
-	mt19937 rng(rd_());
+	random_device rd;
+	mt19937 rng(rd());
 	uniform_int_distribution<> distrib1(0, 6);
 	randomNumber = distrib1(rng);
 	switch (randomNumber)
