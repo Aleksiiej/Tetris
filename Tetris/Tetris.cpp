@@ -30,11 +30,13 @@ int main()
 	while (true)
 	{
 		window.clear(Color::White);
+
 		if (!ptrToBlock->checkIfLost())
 		{
 			gameStatus = GameStatus::Lost;
 			while (window.pollEvent(event));
 		}
+
 		if (gameStatus == GameStatus::Ongoing)
 		{
 			while (window.pollEvent(event))
@@ -74,8 +76,26 @@ int main()
 					}
 				}
 			}
+
+			blockBoard.handleFilledRows();
+			drawBoard(band, blockBoard, window);
+			for (const auto& block : ptrToBlock->getBlockArrayRef())
+			{
+				window.draw(block);
+			}
+			window.display();
+			sleep(milliseconds(GAME_SPEED));
+			if (ptrToBlock->isFallingPossible())
+			{
+				ptrToBlock->fall();
+			}
+			else
+			{
+				ptrToBlock.reset(nullptr);
+				ptrToBlock = move(BlockCreator::createRandomBlock(blockBoard));
+			}
 		}
-		else
+		else if (gameStatus == GameStatus::Lost)
 		{
 			drawBoard(band, blockBoard, window);
 			window.draw(endgameText);
@@ -83,23 +103,6 @@ int main()
 			sleep(milliseconds(2000));
 			window.close();
 			return 0;
-		}
-		blockBoard.handleFilledRows();
-		drawBoard(band, blockBoard, window);
-		for (const auto& block : ptrToBlock->getBlockArrayRef())
-		{
-			window.draw(block);
-		}
-		window.display();
-		sleep(milliseconds(GAME_SPEED));
-		if (ptrToBlock->isFallingPossible())
-		{
-			ptrToBlock->fall();
-		}
-		else
-		{
-			ptrToBlock.reset(nullptr);
-			ptrToBlock = move(BlockCreator::createRandomBlock(blockBoard));
 		}
 	}
 	return 0;
