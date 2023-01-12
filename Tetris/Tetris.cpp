@@ -33,6 +33,7 @@ int main()
 		if (!ptrToBlock->checkIfLost())
 		{
 			gameStatus = GameStatus::Lost;
+			while (window.pollEvent(event));
 		}
 		if (gameStatus == GameStatus::Ongoing)
 		{
