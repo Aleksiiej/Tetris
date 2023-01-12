@@ -100,9 +100,17 @@ int main()
 			drawBoard(band, blockBoard, window);
 			window.draw(endgameText);
 			window.display();
-			sleep(milliseconds(2000));
-			window.close();
-			return 0;
+			while (window.waitEvent(event))
+			{
+				if (event.type == Event::EventType::Closed or event.key.code == Keyboard::Escape)
+				{
+					window.close();
+					break;
+				}
+				else break;
+			}
+			gameStatus = GameStatus::Ongoing;
+			blockBoard.clear();
 		}
 	}
 	return 0;

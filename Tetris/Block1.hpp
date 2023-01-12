@@ -9,7 +9,7 @@ using namespace std;
 
 class BlockBoard;
 
-class Block1: public BaseBlock
+class Block1 : public BaseBlock
 {
 public:
 	Block1() = delete;
