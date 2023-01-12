@@ -1,24 +1,24 @@
 #include "BlockBoard.hpp"
 #include "Block2.hpp"
 
-Block2::Block2(BlockBoard& blockBoardRef) noexcept 
+Block2::Block2(BlockBoard& blockBoardRef) noexcept
 	: BaseBlock(blockBoardRef), currentPosition_(TwoBlockPositions::Horizontal)
 {
 	for_each(begin(blockArray_), end(blockArray_), [](auto& block) { block = RectangleShape{ Vector2f{ GRID, GRID } }; });
 	for_each(begin(blockArray_), end(blockArray_), [](auto& block) { block.setFillColor(Color::Red); });
-	blockArray_.at(0).setPosition((NUMBER_OF_COLUMNS / 2)* GRID - GRID, GRID);
-	blockArray_.at(1).setPosition((NUMBER_OF_COLUMNS / 2)* GRID, GRID);
-	blockArray_.at(2).setPosition((NUMBER_OF_COLUMNS / 2)* GRID + GRID, GRID);
-	blockArray_.at(3).setPosition((NUMBER_OF_COLUMNS / 2)* GRID + 2 * GRID, GRID);
+	blockArray_.at(0).setPosition((NUMBER_OF_COLUMNS / 2) * GRID - GRID, GRID);
+	blockArray_.at(1).setPosition((NUMBER_OF_COLUMNS / 2) * GRID, GRID);
+	blockArray_.at(2).setPosition((NUMBER_OF_COLUMNS / 2) * GRID + GRID, GRID);
+	blockArray_.at(3).setPosition((NUMBER_OF_COLUMNS / 2) * GRID + 2 * GRID, GRID);
 }
 
 const bool Block2::checkIfLost() const noexcept
 {
 	if (blockArray_.at(0).getPosition().y == GRID
-		and ( blockBoardRef_.getBoardArrayRef().at(gridToX(0)).at(gridToY(0)) == Color::Red
-		or blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1)) == Color::Red
-		or blockBoardRef_.getBoardArrayRef().at(gridToX(2)).at(gridToY(3)) == Color::Red
-	    or blockBoardRef_.getBoardArrayRef().at(gridToX(3)).at(gridToY(3)) == Color::Red ))	
+		and (blockBoardRef_.getBoardArrayRef().at(gridToX(0)).at(gridToY(0)) == Color::Red
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(1)).at(gridToY(1)) == Color::Red
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(2)).at(gridToY(3)) == Color::Red
+			or blockBoardRef_.getBoardArrayRef().at(gridToX(3)).at(gridToY(3)) == Color::Red))
 	{
 		return false;
 	}
@@ -161,7 +161,7 @@ void Block2::rotate() noexcept
 			currentPosition_ = TwoBlockPositions::Vertical;
 		}
 		else if (currentPosition_ == TwoBlockPositions::Vertical)
-		{ 
+		{
 			blockArray_.at(0).setPosition(blockArray_.at(0).getPosition().x - GRID, blockArray_.at(0).getPosition().y + GRID);
 			blockArray_.at(2).setPosition(blockArray_.at(2).getPosition().x + GRID, blockArray_.at(2).getPosition().y - GRID);
 			blockArray_.at(3).setPosition(blockArray_.at(3).getPosition().x + 2 * GRID, blockArray_.at(3).getPosition().y - 2 * GRID);
